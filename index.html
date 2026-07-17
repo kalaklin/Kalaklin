@@ -70,12 +70,12 @@
 
     /* ── Hero ── */
     #hero { min-height: 100vh; padding-top: var(--header-h); display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(160deg, #f0f8f7 0%, #ffffff 60%); text-align: center; }
+      background: linear-gradient(160deg, #00544D 0%, #007A70 40%, #00A896 70%, #E8EFED 100%); text-align: center; }
     .hero-inner { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 60px 0; }
-    .hero-headline { font-size: 60px; font-weight: 800; line-height: 1.12; letter-spacing: -.02em; color: var(--brand-primary); max-width: 820px; }
-    .hero-tagline { font-size: 20px; line-height: 28px; color: var(--brand-primary); opacity: .8; max-width: 540px; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--brand-surface);
-      color: var(--brand-primary); font-weight: 600; font-size: 14px; padding: 6px 16px; border-radius: 999px; }
+    .hero-headline { font-size: 60px; font-weight: 800; line-height: 1.12; letter-spacing: -.02em; color: var(--white); max-width: 820px; }
+    .hero-tagline { font-size: 20px; line-height: 28px; color: var(--white); opacity: .9; max-width: 540px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,.2);
+      color: var(--white); font-weight: 600; font-size: 14px; padding: 6px 16px; border-radius: 999px; backdrop-filter: blur(4px); }
     .hero-badge svg { flex-shrink: 0; }
     .hero-mascot { width: 280px; margin-top: 8px; }
 
@@ -114,7 +114,7 @@
     .problem-card { background: var(--white); border-radius: 16px; padding: 28px 24px; text-align: center; box-shadow: 0 2px 12px rgba(0,84,77,.06); }
     .problem-card-icon { width: 72px; height: 72px; object-fit: contain; margin: 0 auto 16px; }
     .problem-card-icon-ph { width: 72px; height: 72px; border-radius: 12px; background: var(--brand-surface);
-      margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+      margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; }
     .problem-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
     .problem-card p { font-size: 13px; line-height: 20px; opacity: .8; }
     .why-list { display: flex; flex-direction: column; gap: 24px; margin-top: 16px; }
@@ -183,7 +183,7 @@
     /* ── Footer ── */
     #site-footer { background: var(--brand-primary); color: var(--white); padding: 64px 0 0; }
     .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 48px; }
-    .footer-logo img { height: 40px; margin-bottom: 12px; filter: brightness(0) invert(1); }
+    .footer-logo img { height: 44px; margin-bottom: 12px; filter: brightness(0) invert(1); }
     .footer-logo-ph { height: 40px; background: rgba(255,255,255,.2); border-radius: 6px; display: flex;
       align-items: center; padding: 0 12px; font-weight: 800; font-size: 18px; color: var(--white);
       width: fit-content; margin-bottom: 12px; }
@@ -258,19 +258,8 @@
       <a href="#cara-kerja">Cara Kerja</a>
       <a href="#paket">Paket</a>
       <a href="#tentang-kalaklin">Tentang Kalaklin</a>
-      <a href="#faq">FAQ</a>
-      <a href="https://wa.me/6281234567890?text=Halo%20Kalaklin%2C%20saya%20ingin%20cek%20apakah%20alamat%20saya%20masuk%20area%20layanan%20dan%20mengetahui%20paket%20langganan%20yang%20tersedia."
-         target="_blank" rel="noopener noreferrer" class="btn btn-sm" id="cta-header-wa"
-         onclick="trackEvent('cta_whatsapp_click',{location:'header'})">
-        Hubungi Kami
-      </a>
     </nav>
     <div style="display:flex;align-items:center;gap:12px;">
-      <a href="https://wa.me/6281234567890?text=Halo%20Kalaklin%2C%20saya%20ingin%20cek%20apakah%20alamat%20saya%20masuk%20area%20layanan%20dan%20mengetahui%20paket%20langganan%20yang%20tersedia."
-         target="_blank" rel="noopener noreferrer" class="btn btn-sm" style="display:none" id="cta-header-mobile"
-         onclick="trackEvent('cta_whatsapp_click',{location:'header_mobile'})">
-        Hubungi Kami
-      </a>
       <button class="hamburger" id="hamburger" aria-label="Buka menu navigasi" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -286,11 +275,6 @@
     <a href="#paket" class="mobile-nav-link">Paket</a>
     <a href="#tentang-kalaklin" class="mobile-nav-link">Tentang Kalaklin</a>
     <a href="#faq" class="mobile-nav-link">FAQ</a>
-    <a href="https://wa.me/6281234567890?text=Halo%20Kalaklin%2C%20saya%20ingin%20cek%20apakah%20alamat%20saya%20masuk%20area%20layanan%20dan%20mengetahui%20paket%20langganan%20yang%20tersedia."
-       target="_blank" rel="noopener noreferrer" class="btn" style="margin-top:8px;"
-       onclick="trackEvent('cta_whatsapp_click',{location:'mobile_nav'})">
-      Hubungi Kami
-    </a>
   </nav>
 </div>
 
@@ -299,7 +283,7 @@
 <!-- ══════════════ HERO ══════════════ -->
 <section id="hero">
   <div class="container hero-inner">
-    <h1 class="hero-headline">24 jam siap melayani,<br>100% bersih, 0% plastik!</h1>
+    <h1 class="hero-headline">24 Jam Siap Melayani,<br>100% Bersih, 0% Plastik!</h1>
     <p class="hero-tagline">Bersih Bajunya, Hijau Buminya, Berseri Hatinya</p>
     <div class="hero-badge">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
@@ -375,7 +359,6 @@
               <div class="field-error" id="err-instagram" role="alert">Akun Instagram tidak boleh kosong.</div>
             </div>
             <button type="submit" class="btn btn-full" id="btn-submit">Daftar sekarang →</button>
-            <p class="form-microcopy">Belum perlu bayar sekarang</p>
             <p class="form-privacy">
               Dengan mendaftar, kamu setuju dengan
               <a id="privacy-link" role="button" tabindex="0" aria-haspopup="dialog">Kebijakan Privasi</a> kami.
@@ -394,17 +377,23 @@
     <p class="section-subtitle" style="text-align:center;">Kamu tidak sendirian — banyak yang merasakannya</p>
     <div class="problem-grid">
       <div class="problem-card">
-        <div class="problem-card-icon-ph" aria-hidden="true">⏰</div>
+        <div class="problem-card-icon-ph" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
         <h4>Tidak Punya Waktu</h4>
         <p>Merasa capek dan tidak memiliki waktu untuk mencuci baju.</p>
       </div>
       <div class="problem-card">
-        <div class="problem-card-icon-ph" aria-hidden="true">🧴</div>
+        <div class="problem-card-icon-ph" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
         <h4>Khawatir Kesehatan Kulit</h4>
         <p>Kekhawatiran tentang kesehatan kulit pada keluarga akibat deterjen keras.</p>
       </div>
       <div class="problem-card">
-        <div class="problem-card-icon-ph" aria-hidden="true">🛍️</div>
+        <div class="problem-card-icon-ph" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+        </div>
         <h4>Sampah Plastik Menumpuk</h4>
         <p>Menumpuknya sampah plastik dari kemasan laundry konvensional.</p>
       </div>
@@ -460,13 +449,13 @@
         <div class="pricing-name">Eco-Simpel</div>
         <div class="pricing-price">Rp 180.000<span>/bulan</span></div>
         <p class="pricing-detail">Cuci Kering Lipat, maksimal 20 kg atau 4× jemput-antar per bulan. Cocok untuk kamu yang tinggal sendiri atau pasangan muda.</p>
-        <button class="btn" onclick="scrollToForm(this,'Eco-Simpel')">Mau Paket Ini</button>
+        <button class="btn" onclick="scrollToForm(this,'Eco-Simpel')">Daftar Sekarang</button>
       </div>
       <div class="pricing-card">
         <div class="pricing-name">Eco-Family &amp; Premium</div>
         <div class="pricing-price">Rp 240.000<span>/bulan</span></div>
         <p class="pricing-detail">Cuci Kering Setrika, maksimal 20 kg atau 4× jemput-antar, termasuk setrika uap rapi. Ideal untuk keluarga dan profesional sibuk.</p>
-        <button class="btn" onclick="scrollToForm(this,'Eco-Family & Premium')">Mau Paket Ini</button>
+        <button class="btn" onclick="scrollToForm(this,'Eco-Family & Premium')">Daftar Sekarang</button>
       </div>
     </div>
 
@@ -547,11 +536,6 @@
           cuci praktis yang aman untuk kulit sensitif, sekaligus ikut menjaga bumi berkat penggunaan
           deterjen ramah lingkungan dan Reusable Canvas Laundry Bag.
         </p>
-        <a href="https://wa.me/6281234567890?text=Halo%20Kalaklin%2C%20saya%20ingin%20cek%20apakah%20alamat%20saya%20masuk%20area%20layanan%20dan%20mengetahui%20paket%20langganan%20yang%20tersedia."
-           target="_blank" rel="noopener noreferrer" class="btn" style="margin-top:28px;display:inline-flex;"
-           onclick="trackEvent('cta_whatsapp_click',{location:'about'})">
-          Hubungi Kami via WhatsApp
-        </a>
       </div>
       <div>
         <div class="about-img">
@@ -632,7 +616,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-logo">
-          <img src="Creative-Content/Logo/Logo Brand - KalaKlin (white bg).png" alt="Logo Kalaklin"
+          <img src="Creative-Content/Logo/Logo Brand - KalaKlin.png" alt="Logo Kalaklin"
             onerror="this.outerHTML='<div class=\'footer-logo-ph\'>KalaKlin</div>'" />
         </div>
         <p class="footer-tagline">Bersih Bajunya, Hijau Buminya,<br>Berseri Hatinya.</p>
@@ -683,7 +667,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <div class="container">© 2024 Kalaklin. All rights reserved.</div>
+    <div class="container">© 2026 Kalaklin. All rights reserved.</div>
   </div>
 </footer>
 
@@ -708,7 +692,7 @@
     <button class="modal-close" id="modal-privacy-close" aria-label="Tutup">×</button>
     <h2 class="modal-title" id="modal-privacy-title">Kebijakan Privasi</h2>
     <div class="modal-body" style="font-size:14px;line-height:22px;">
-      <p style="margin-bottom:12px;"><strong>Terakhir diperbarui: 2024</strong></p>
+      <p style="margin-bottom:12px;"><strong>Terakhir diperbarui: 2026</strong></p>
       <p style="margin-bottom:10px;">Kalaklin menghormati privasi Anda. Data yang Anda berikan (Nama dan Akun Instagram) hanya digunakan untuk keperluan komunikasi pre-launch dan pengiriman penawaran early-bird eksklusif.</p>
       <p style="margin-bottom:10px;"><strong>Data yang dikumpulkan:</strong> Nama lengkap dan akun Instagram.</p>
       <p style="margin-bottom:10px;"><strong>Penggunaan data:</strong> Menghubungi Anda sebelum dan sesudah peluncuran layanan Kalaklin via Instagram DM atau WhatsApp.</p>
@@ -727,18 +711,11 @@
     console.debug('[Analytics]', eventName, params || {});
   }
 
-  /* ── Header scroll effect & mobile show ── */
+  /* ── Header scroll effect ── */
   const header = document.getElementById('site-header');
-  const ctaMobile = document.getElementById('cta-header-mobile');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 80);
   }, { passive: true });
-  function updateHeaderMobile() {
-    const isMobile = window.innerWidth < 1024;
-    ctaMobile.style.display = isMobile ? 'inline-flex' : 'none';
-  }
-  updateHeaderMobile();
-  window.addEventListener('resize', updateHeaderMobile);
 
   /* ── Hamburger menu ── */
   const hamburger = document.getElementById('hamburger');
