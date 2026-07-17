@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalaklin — Laundry Berlangganan Ramah Lingkungan Jakarta Barat</title>
+  <meta name="description" content="Layanan laundry berlangganan ramah lingkungan berbasis WhatsApp di Jakarta Barat. 24 jam siap melayani, 100% bersih, 0% plastik. Daftar waitlist sekarang!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brand-primary: #00544D;
+      --brand-accent: #FF7A45;
+      --brand-link: #3C85D4;
+      --brand-surface: #E8EFED;
+      --white: #FFFFFF;
+      --error: #DC2626;
+      --font: 'Montserrat', sans-serif;
+      --header-h: 72px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); color: var(--brand-primary); background: var(--white); overflow-x: hidden; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+
+    /* ── Utilities ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section-pad { padding: 80px 0; }
+    .section-title { font-size: 32px; font-weight: 800; line-height: 1.2; color: var(--brand-primary); margin-bottom: 12px; }
+    .section-subtitle { font-size: 16px; line-height: 24px; opacity: .8; margin-bottom: 40px; }
+
+    /* ── CTA Button ── */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      font-family: var(--font); font-weight: 700; font-size: 16px; color: var(--white);
+      background: var(--brand-accent); border-radius: 6px; padding: 12px 28px;
+      min-height: 48px; min-width: 44px; transition: filter .15s, transform .15s; border: none; cursor: pointer; }
+    .btn:hover { filter: brightness(.88); transform: scale(1.02); }
+    .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; filter: none; }
+    .btn-outline { background: transparent; color: var(--brand-primary); border: 2px solid var(--brand-primary); }
+    .btn-outline:hover { background: var(--brand-primary); color: var(--white); filter: none; }
+    .btn-sm { font-size: 14px; padding: 9px 20px; min-height: 40px; }
+    .btn-full { width: 100%; }
+
+    /* ── Header ── */
+    #site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--header-h);
+      background: rgba(255,255,255,.95); backdrop-filter: blur(8px); transition: box-shadow .2s; }
+    #site-header.scrolled { box-shadow: 0 2px 16px rgba(0,84,77,.12); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+    .header-logo img { height: 44px; width: auto; }
+    .header-nav { display: flex; align-items: center; gap: 32px; }
+    .header-nav a { font-size: 15px; font-weight: 500; color: var(--brand-primary); transition: opacity .15s; }
+    .header-nav a:hover { opacity: .7; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 10px; cursor: pointer; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--brand-primary); border-radius: 2px; transition: transform .25s, opacity .25s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile nav drawer */
+    .mobile-nav { display: none; position: fixed; inset: 0; z-index: 99; }
+    .mobile-nav-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.45); }
+    .mobile-nav-drawer { position: absolute; top: 0; right: 0; bottom: 0; width: 280px;
+      background: var(--white); padding: 88px 32px 32px; display: flex; flex-direction: column; gap: 24px;
+      box-shadow: -4px 0 24px rgba(0,0,0,.15); }
+    .mobile-nav-drawer a { font-size: 18px; font-weight: 600; color: var(--brand-primary); padding: 8px 0; border-bottom: 1px solid var(--brand-surface); }
+    .mobile-nav.open { display: block; }
+
+    /* ── Hero ── */
+    #hero { min-height: 100vh; padding-top: var(--header-h); display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(160deg, #f0f8f7 0%, #ffffff 60%); text-align: center; }
+    .hero-inner { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 60px 0; }
+    .hero-headline { font-size: 60px; font-weight: 800; line-height: 1.12; letter-spacing: -.02em; color: var(--brand-primary); max-width: 820px; }
+    .hero-tagline { font-size: 20px; line-height: 28px; color: var(--brand-primary); opacity: .8; max-width: 540px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--brand-surface);
+      color: var(--brand-primary); font-weight: 600; font-size: 14px; padding: 6px 16px; border-radius: 999px; }
+    .hero-badge svg { flex-shrink: 0; }
+    .hero-mascot { width: 280px; margin-top: 8px; }
+
+    /* ── Value Prop + Form ── */
+    #daftar { background: var(--white); }
+    .vp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .vp-intro { font-size: 17px; line-height: 26px; margin-bottom: 28px; }
+    .vp-list { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+    .vp-item { display: flex; align-items: flex-start; gap: 14px; }
+    .vp-icon { width: 44px; height: 44px; flex-shrink: 0; object-fit: contain; }
+    .vp-icon-placeholder { width: 44px; height: 44px; flex-shrink: 0; border-radius: 8px;
+      background: var(--brand-surface); display: flex; align-items: center; justify-content: center; }
+    .vp-item-text strong { display: block; font-weight: 700; font-size: 15px; }
+    .vp-item-text span { font-size: 14px; opacity: .8; }
+
+    /* Form Card */
+    .form-card { background: var(--white); border: 2px solid var(--brand-primary); border-radius: 16px; padding: 36px 32px; }
+    .form-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .form-card p { font-size: 14px; opacity: .75; margin-bottom: 24px; }
+    .form-field { margin-bottom: 18px; }
+    .form-field label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .form-field input { width: 100%; background: var(--brand-surface); border: 2px solid transparent;
+      border-radius: 8px; padding: 11px 14px; font-family: var(--font); font-size: 15px; color: var(--brand-primary);
+      outline: none; transition: border-color .15s; }
+    .form-field input:focus { border-color: var(--brand-primary); }
+    .form-field input.error { border-color: var(--error); }
+    .field-error { font-size: 12px; color: var(--error); margin-top: 4px; display: none; }
+    .field-error.visible { display: block; }
+    .form-microcopy { font-size: 13px; font-style: italic; opacity: .7; text-align: center; margin-top: 10px; }
+    .form-privacy { font-size: 13px; text-align: center; margin-top: 8px; }
+    .form-privacy a { color: var(--brand-link); text-decoration: underline; cursor: pointer; }
+
+    /* ── Problem & Why ── */
+    #mengapa { background: var(--brand-surface); }
+    .problem-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .problem-card { background: var(--white); border-radius: 16px; padding: 28px 24px; text-align: center; box-shadow: 0 2px 12px rgba(0,84,77,.06); }
+    .problem-card-icon { width: 72px; height: 72px; object-fit: contain; margin: 0 auto 16px; }
+    .problem-card-icon-ph { width: 72px; height: 72px; border-radius: 12px; background: var(--brand-surface);
+      margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+    .problem-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .problem-card p { font-size: 13px; line-height: 20px; opacity: .8; }
+    .why-list { display: flex; flex-direction: column; gap: 24px; margin-top: 16px; }
+    .why-item { display: flex; align-items: flex-start; gap: 16px; }
+    .why-icon { width: 52px; height: 52px; flex-shrink: 0; object-fit: contain; }
+    .why-icon-ph { width: 52px; height: 52px; flex-shrink: 0; border-radius: 10px;
+      background: var(--brand-primary); display: flex; align-items: center; justify-content: center; font-size: 22px; }
+    .why-item h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .why-item p { font-size: 14px; line-height: 22px; opacity: .8; }
+    .sub-section { margin-top: 56px; }
+
+    /* ── Pricing ── */
+    #paket { background: var(--white); }
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 36px; }
+    .pricing-card { border: 2px solid var(--brand-primary); border-radius: 16px; padding: 36px 32px;
+      display: flex; flex-direction: column; gap: 16px; }
+    .pricing-name { font-size: 20px; font-weight: 700; }
+    .pricing-price { font-size: 32px; font-weight: 800; color: var(--brand-accent); }
+    .pricing-price span { font-size: 16px; font-weight: 500; color: var(--brand-primary); opacity: .7; }
+    .pricing-detail { font-size: 14px; line-height: 22px; opacity: .8; flex: 1; }
+    .promo-callout { background: #fff4f0; border: 2px solid var(--brand-accent); border-radius: 16px; padding: 32px 36px;
+      display: flex; align-items: center; gap: 32px; }
+    .promo-mascot { width: 100px; flex-shrink: 0; }
+    .promo-mascot-ph { width: 100px; height: 100px; flex-shrink: 0; border-radius: 12px; background: var(--brand-surface);
+      display: flex; align-items: center; justify-content: center; font-size: 36px; }
+    .promo-text h4 { font-size: 18px; font-weight: 700; color: var(--brand-accent); margin-bottom: 8px; }
+    .promo-text p { font-size: 14px; line-height: 22px; margin-bottom: 16px; }
+
+    /* ── How It Works ── */
+    #cara-kerja { background: var(--brand-surface); }
+    .steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+    .step-card { background: var(--white); border-radius: 16px; padding: 28px 24px; position: relative; }
+    .step-num { width: 32px; height: 32px; background: var(--brand-primary); color: var(--white);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800; margin-bottom: 14px; }
+    .step-icon { width: 52px; height: 52px; object-fit: contain; margin-bottom: 14px; }
+    .step-icon-ph { width: 52px; height: 52px; border-radius: 10px; background: var(--brand-surface);
+      display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 14px; }
+    .step-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .step-card p { font-size: 13px; line-height: 20px; opacity: .8; }
+
+    /* ── About ── */
+    #tentang-kalaklin { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .about-text h2 { font-size: 32px; font-weight: 800; margin-bottom: 20px; }
+    .about-text p { font-size: 16px; line-height: 26px; opacity: .85; }
+    .about-img { border-radius: 20px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,84,77,.12); }
+    .about-img img { width: 100%; height: 360px; object-fit: cover; }
+    .about-img-ph { width: 100%; height: 360px; background: var(--brand-surface); border-radius: 20px;
+      display: flex; align-items: center; justify-content: center; color: var(--brand-primary);
+      font-weight: 600; font-size: 14px; text-align: center; padding: 20px; }
+
+    /* ── FAQ ── */
+    #faq { background: var(--brand-surface); }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 800px; margin: 0 auto; }
+    .faq-item { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,84,77,.06); }
+    .faq-question { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 20px 24px; font-family: var(--font); font-size: 15px; font-weight: 700; color: var(--brand-primary);
+      cursor: pointer; background: none; border: none; text-align: left; min-height: 44px; }
+    .faq-chevron { width: 20px; height: 20px; flex-shrink: 0; transition: transform .25s; color: var(--brand-link); }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+    .faq-answer-inner { padding: 0 24px 20px; font-size: 14px; line-height: 22px; opacity: .85; }
+    .faq-item.open .faq-answer { max-height: 300px; }
+
+    /* ── Footer ── */
+    #site-footer { background: var(--brand-primary); color: var(--white); padding: 64px 0 0; }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 48px; }
+    .footer-logo img { height: 40px; margin-bottom: 12px; filter: brightness(0) invert(1); }
+    .footer-logo-ph { height: 40px; background: rgba(255,255,255,.2); border-radius: 6px; display: flex;
+      align-items: center; padding: 0 12px; font-weight: 800; font-size: 18px; color: var(--white);
+      width: fit-content; margin-bottom: 12px; }
+    .footer-tagline { font-size: 13px; opacity: .7; line-height: 20px; }
+    .footer-col h4 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+      opacity: .6; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 14px; opacity: .85; transition: opacity .15s; }
+    .footer-col ul li a:hover { opacity: 1; }
+    .social-links { display: flex; gap: 12px; margin-top: 8px; }
+    .social-link { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center; transition: background .15s; }
+    .social-link:hover { background: rgba(255,255,255,.3); }
+    .social-link svg { width: 18px; height: 18px; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.15); padding: 20px 0; text-align: center; font-size: 13px; opacity: .6; }
+
+    /* ── Modal ── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 200;
+      display: none; align-items: center; justify-content: center; padding: 24px; }
+    .modal-overlay.open { display: flex; animation: fadeIn .15s ease; }
+    .modal-box { background: var(--white); border-radius: 20px; padding: 40px 36px; max-width: 480px; width: 100%;
+      position: relative; animation: scaleIn .15s ease; max-height: 90vh; overflow-y: auto; }
+    .modal-close { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border-radius: 50%;
+      background: var(--brand-surface); border: none; cursor: pointer; font-size: 18px; display: flex;
+      align-items: center; justify-content: center; color: var(--brand-primary); }
+    .modal-title { font-size: 22px; font-weight: 700; margin-bottom: 14px; }
+    .modal-body { font-size: 15px; line-height: 24px; opacity: .85; margin-bottom: 28px; }
+    .modal-icon { font-size: 48px; text-align: center; margin-bottom: 16px; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes scaleIn { from { transform: scale(.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    /* anchor offset for sticky header */
+    .anchor-target { scroll-margin-top: calc(var(--header-h) + 16px); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1023px) {
+      .header-nav { display: none; }
+      .hamburger { display: flex; }
+      .vp-grid { grid-template-columns: 1fr; gap: 40px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 767px) {
+      .section-title { font-size: 26px; }
+      .hero-headline { font-size: 34px; }
+      .problem-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .promo-callout { flex-direction: column; text-align: center; gap: 20px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .modal-box { padding: 32px 24px; }
+      .section-pad { padding: 60px 0; }
+    }
+    @media (max-width: 479px) {
+      .hero-headline { font-size: 28px; }
+      .hero-mascot { width: 200px; }
+      .container { padding: 0 16px; }
+      .form-card { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header id="site-header">
+  <div class="container header-inner">
+    <a href="#hero" class="header-logo" aria-label="Kalaklin — Halaman Utama">
+      <img src="Creative-Content/Logo/Logo Brand - KalaKlin.png" alt="Logo Kalaklin" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+      <span style="display:none;font-weight:800;font-size:20px;color:var(--brand-primary);">KalaKlin</span>
+    </a>
+    <nav class="header-nav" aria-label="Navigasi Utama">
+      <a href="#cara-kerja">Cara Kerja</a>
+      <a href="#paket">Paket</a>
+      <a href="#tentang-kalaklin">Tentang Kalaklin</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://wa.me/6281234567890?text=Halo%20Kalaklin%2C%20saya%20ingin%20cek%20apakah%20alamat%20saya%20masuk%20area%20layanan%20dan%20mengetahui%20paket%20langganan%20yang%20tersedia."
+         target="_blank" rel="noopener noreferrer" class="btn btn-sm" id="cta-header-wa"
+         onclick="trackEvent('cta_whatsapp_click',{location:'header'})">
+        Hubungi Kami
+      </a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="https://wa.me/6281234567890?text=Halo%20Kalaklin%2C%20saya%20ingin%20cek%20apakah%20alamat%20saya%20masuk%20area%20layanan%20dan%20mengetahui%20paket%20langganan%20yang%20tersedia."
+         target="_blank" rel="noopener noreferrer" class="btn btn-sm" style="display:none" id="cta-header-mobile"
+         onclick="trackEvent('cta_whatsapp_click',{location:'header_mobile'})">
+        Hubungi Kami
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Buka menu navigasi" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav Drawer -->
+<div class="mobile-nav" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Menu Navigasi">
+  <div class="mobile-nav-overlay" id="nav-overlay"></div>
+  <nav class="mobile-nav-drawer">
+    <a href="#cara-kerja" class="mobile-nav-link">Cara Kerja</a>
+    <a href="#paket" class="mobile-nav-link">Paket</a>
+    <a href="#tentang-kalaklin" class="mobile-nav-link">Tentang Kalaklin</a>
+    <a href="#faq" class="mobile-nav-link">FAQ</a>
+    <a href="https://wa.me/6281234567890?text=Halo%20Kalaklin%2C%20saya%20ingin%20cek%20apakah%20alamat%20saya%20masuk%20area%20layanan%20dan%20mengetahui%20paket%20langganan%20yang%20tersedia."
+       target="_blank" rel="noopener noreferrer" class="btn" style="margin-top:8px;"
+       onclick="trackEvent('cta_whatsapp_click',{location:'mobile_nav'})">
+      Hubungi Kami
+    </a>
+  </nav>
+</div>
+
+<main>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section id="hero">
+  <div class="container hero-inner">
+    <h1 class="hero-headline">24 jam siap melayani,<br>100% bersih, 0% plastik!</h1>
+    <p class="hero-tagline">Bersih Bajunya, Hijau Buminya, Berseri Hatinya</p>
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      Jakarta Barat
+    </div>
+    <img
+      src="Creative-Content/Mascot/Coming Soon Mascot.png"
+      alt="Maskot Kala memegang papan bertuliskan Segera Hadir"
+      class="hero-mascot"
+      onerror="this.outerHTML='<div class=\'hero-mascot\' style=\'height:280px;background:var(--brand-surface);border-radius:20px;border:2px dashed var(--brand-primary);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--brand-primary);text-align:center;padding:20px\'>[PLACEHOLDER: Coming Soon Mascot.png]</div>'"
+    />
+  </div>
+</section>
+
+<!-- ══════════════ VALUE PROP + FORM ══════════════ -->
+<section id="daftar" class="section-pad anchor-target">
+  <div class="container">
+    <div class="vp-grid">
+      <!-- Left: Value Props -->
+      <div>
+        <p class="vp-intro">
+          Baju bersih tepat waktu, tanpa rasa lelah.<br>
+          <strong>Kalaklin hadir untuk membantumu dengan memberikan:</strong>
+        </p>
+        <ul class="vp-list">
+          <li class="vp-item">
+            <img src="Creative-Content/Icons/Layanan 24 jam.png" alt="" class="vp-icon"
+              onerror="this.outerHTML='<div class=\'vp-icon-placeholder\'><svg width=\'22\' height=\'22\' fill=\'none\' stroke=\'var(--brand-primary)\' stroke-width=\'2\' viewBox=\'0 0 24 24\'><circle cx=\'12\' cy=\'12\' r=\'10\'/><polyline points=\'12 6 12 12 16 14\'/></svg></div>'" />
+            <div class="vp-item-text"><strong>Layanan 24 jam</strong><span>Siap melayani kapan pun kamu butuh</span></div>
+          </li>
+          <li class="vp-item">
+            <img src="Creative-Content/Icons/Delivery.png" alt="" class="vp-icon"
+              onerror="this.outerHTML='<div class=\'vp-icon-placeholder\'><svg width=\'22\' height=\'22\' fill=\'none\' stroke=\'var(--brand-primary)\' stroke-width=\'2\' viewBox=\'0 0 24 24\'><rect x=\'1\' y=\'3\' width=\'15\' height=\'13\'/><polygon points=\'16 8 20 8 23 11 23 16 16 16 16 8\'/><circle cx=\'5.5\' cy=\'18.5\' r=\'2.5\'/><circle cx=\'18.5\' cy=\'18.5\' r=\'2.5\'/></svg></div>'" />
+            <div class="vp-item-text"><strong>24 jam antar jemput</strong><span>Kurir datang langsung ke depan pintumu</span></div>
+          </li>
+          <li class="vp-item">
+            <img src="Creative-Content/Icons/Jaminan Bersih, Rapi.png" alt="" class="vp-icon"
+              onerror="this.outerHTML='<div class=\'vp-icon-placeholder\'><svg width=\'22\' height=\'22\' fill=\'none\' stroke=\'var(--brand-primary)\' stroke-width=\'2\' viewBox=\'0 0 24 24\'><polyline points=\'20 6 9 17 4 12\'/></svg></div>'" />
+            <div class="vp-item-text"><strong>Garansi tepat waktu</strong><span>Terlambat? Kami kasih voucher kompensasi</span></div>
+          </li>
+          <li class="vp-item">
+            <img src="Creative-Content/Icons/Sensitive-skin friendly Detergen.png" alt="" class="vp-icon"
+              onerror="this.outerHTML='<div class=\'vp-icon-placeholder\'><svg width=\'22\' height=\'22\' fill=\'none\' stroke=\'var(--brand-primary)\' stroke-width=\'2\' viewBox=\'0 0 24 24\'><path d=\'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z\'/></svg></div>'" />
+            <div class="vp-item-text"><strong>Aman untuk keluarga</strong><span>Deterjen biodegradable &amp; hypoallergenic</span></div>
+          </li>
+          <li class="vp-item">
+            <img src="Creative-Content/Icons/No Plastic Bags.png" alt="" class="vp-icon"
+              onerror="this.outerHTML='<div class=\'vp-icon-placeholder\'><svg width=\'22\' height=\'22\' fill=\'none\' stroke=\'var(--brand-primary)\' stroke-width=\'2\' viewBox=\'0 0 24 24\'><path d=\'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\'/></svg></div>'" />
+            <div class="vp-item-text"><strong>Ramah lingkungan</strong><span>0% plastik sekali pakai, Reusable Canvas Bag</span></div>
+          </li>
+          <li class="vp-item">
+            <img src="Creative-Content/Icons/Notifikasi - Tracking 1.png" alt="" class="vp-icon"
+              onerror="this.outerHTML='<div class=\'vp-icon-placeholder\'><svg width=\'22\' height=\'22\' fill=\'none\' stroke=\'var(--brand-primary)\' stroke-width=\'2\' viewBox=\'0 0 24 24\'><path d=\'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z\'/></svg></div>'" />
+            <div class="vp-item-text"><strong>Pesan praktis via WhatsApp</strong><span>Tanpa aplikasi, cukup chat seperti biasa</span></div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right: Lead Form -->
+      <div>
+        <div class="form-card" role="form" aria-label="Form Pendaftaran Waitlist">
+          <h3>Daftar Waitlist Sekarang</h3>
+          <p>Jadilah yang pertama merasakan layanan Kalaklin. Gratis, tanpa komitmen.</p>
+          <form id="lead-form" novalidate>
+            <div class="form-field">
+              <label for="input-name">Nama</label>
+              <input type="text" id="input-name" name="name" placeholder="Nama lengkapmu" autocomplete="name" />
+              <div class="field-error" id="err-name" role="alert">Nama tidak boleh kosong.</div>
+            </div>
+            <div class="form-field">
+              <label for="input-instagram">Akun Instagram</label>
+              <input type="text" id="input-instagram" name="instagram" placeholder="@username" autocomplete="off" />
+              <div class="field-error" id="err-instagram" role="alert">Akun Instagram tidak boleh kosong.</div>
+            </div>
+            <button type="submit" class="btn btn-full" id="btn-submit">Daftar sekarang →</button>
+            <p class="form-microcopy">Belum perlu bayar sekarang</p>
+            <p class="form-privacy">
+              Dengan mendaftar, kamu setuju dengan
+              <a id="privacy-link" role="button" tabindex="0" aria-haspopup="dialog">Kebijakan Privasi</a> kami.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ PROBLEM & WHY ══════════════ -->
+<section id="mengapa" class="section-pad anchor-target">
+  <div class="container">
+    <h2 class="section-title" style="text-align:center;">Sering Mengalami Masalah Seperti Ini?</h2>
+    <p class="section-subtitle" style="text-align:center;">Kamu tidak sendirian — banyak yang merasakannya</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-card-icon-ph" aria-hidden="true">⏰</div>
+        <h4>Tidak Punya Waktu</h4>
+        <p>Merasa capek dan tidak memiliki waktu untuk mencuci baju.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-icon-ph" aria-hidden="true">🧴</div>
+        <h4>Khawatir Kesehatan Kulit</h4>
+        <p>Kekhawatiran tentang kesehatan kulit pada keluarga akibat deterjen keras.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-icon-ph" aria-hidden="true">🛍️</div>
+        <h4>Sampah Plastik Menumpuk</h4>
+        <p>Menumpuknya sampah plastik dari kemasan laundry konvensional.</p>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <h2 class="section-title">Kenapa Harus Kalaklin?</h2>
+      <div class="why-list">
+        <div class="why-item">
+          <img src="Creative-Content/Icons/Layanan 24 jam.png" alt="" class="why-icon"
+            onerror="this.outerHTML='<div class=\'why-icon-ph\' aria-hidden=\'true\'>🕐</div>'" />
+          <div>
+            <h4>24 jam siap melayani</h4>
+            <p>Kalaklin hadir untuk membantu pelanggan yang memiliki keterbatasan waktu dalam mencuci pakaian.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <img src="Creative-Content/Icons/Delivery.png" alt="" class="why-icon"
+            onerror="this.outerHTML='<div class=\'why-icon-ph\' aria-hidden=\'true\'>🚗</div>'" />
+          <div>
+            <h4>24 jam antar jemput</h4>
+            <p>Kalaklin memberikan kemudahan layanan antar-jemput langsung di depan pintu rumah atau kos secara terjadwal.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <img src="Creative-Content/Icons/No Plastic Bags.png" alt="" class="why-icon"
+            onerror="this.outerHTML='<div class=\'why-icon-ph\' aria-hidden=\'true\'>🌿</div>'" />
+          <div>
+            <h4>0% plastik</h4>
+            <p>Kalaklin mengganti plastik dengan kemasan Reusable Canvas Laundry Bag yang digunakan setiap kali proses penjemputan dan pengantaran.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <img src="Creative-Content/Icons/Notifikasi - Tracking 1.png" alt="" class="why-icon"
+            onerror="this.outerHTML='<div class=\'why-icon-ph\' aria-hidden=\'true\'>💬</div>'" />
+          <div>
+            <h4>Pesan praktis via WhatsApp</h4>
+            <p>Kalaklin memproses seluruh pendaftaran, penjadwalan kurir, dan pelacakan status cucian terintegrasi secara otomatis dan praktis melalui WhatsApp.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ PRICING ══════════════ -->
+<section id="paket" class="section-pad anchor-target">
+  <div class="container">
+    <h2 class="section-title" style="text-align:center;">Paket Langganan</h2>
+    <p class="section-subtitle" style="text-align:center;">Pilih paket yang sesuai kebutuhanmu, mulai setelah launch!</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-name">Eco-Simpel</div>
+        <div class="pricing-price">Rp 180.000<span>/bulan</span></div>
+        <p class="pricing-detail">Cuci Kering Lipat, maksimal 20 kg atau 4× jemput-antar per bulan. Cocok untuk kamu yang tinggal sendiri atau pasangan muda.</p>
+        <button class="btn" onclick="scrollToForm(this,'Eco-Simpel')">Mau Paket Ini</button>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-name">Eco-Family &amp; Premium</div>
+        <div class="pricing-price">Rp 240.000<span>/bulan</span></div>
+        <p class="pricing-detail">Cuci Kering Setrika, maksimal 20 kg atau 4× jemput-antar, termasuk setrika uap rapi. Ideal untuk keluarga dan profesional sibuk.</p>
+        <button class="btn" onclick="scrollToForm(this,'Eco-Family & Premium')">Mau Paket Ini</button>
+      </div>
+    </div>
+
+    <div class="promo-callout">
+      <img src="Creative-Content/Mascot/Promo.png" alt="Maskot Kala memberikan promo" class="promo-mascot"
+        onerror="this.outerHTML='<div class=\'promo-mascot-ph\' aria-hidden=\'true\'>🎁</div>'" />
+      <div class="promo-text">
+        <h4>🎉 Early-Bird Eksklusif!</h4>
+        <p>10 orang pertama yang mendaftar mendapatkan potongan <strong>Rp 40.000</strong> untuk bulan pertama Paket Eco-Family &amp; Premium — dari <s>Rp 240.000</s> menjadi <strong style="color:var(--brand-accent)">Rp 200.000</strong>.</p>
+        <button class="btn" onclick="scrollToForm(this,'promo_early_bird')">Claim Sekarang</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CARA KERJA ══════════════ -->
+<section id="cara-kerja" class="section-pad anchor-target">
+  <div class="container">
+    <h2 class="section-title" style="text-align:center;">Cara Kerja Kalaklin</h2>
+    <p class="section-subtitle" style="text-align:center;">Enam langkah mudah — semua lewat WhatsApp</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num" aria-hidden="true">1</div>
+        <img src="Creative-Content/Icons/Notifikasi - Tracking 2.png" alt="" class="step-icon"
+          onerror="this.outerHTML='<div class=\'step-icon-ph\' aria-hidden=\'true\'>📋</div>'" />
+        <h4>Pesanan dibuat</h4>
+        <p>Pesanan masuk, kurir Kalaklin siap menerima penugasan.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num" aria-hidden="true">2</div>
+        <img src="Creative-Content/Icons/Pengambilan.png" alt="" class="step-icon"
+          onerror="this.outerHTML='<div class=\'step-icon-ph\' aria-hidden=\'true\'>🧺</div>'" />
+        <h4>Pakaian dijemput</h4>
+        <p>Kurir Kalaklin mengambil keranjang laundry langsung dari pintu rumah kamu.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num" aria-hidden="true">3</div>
+        <img src="Creative-Content/Icons/Notifikasi - Tracking 1.png" alt="" class="step-icon"
+          onerror="this.outerHTML='<div class=\'step-icon-ph\' aria-hidden=\'true\'>🧾</div>'" />
+        <h4>Nota konfirmasi</h4>
+        <p>E-receipt berisi tanggal masuk, tanggal selesai, berat pakaian, dan jumlah pakaianmu.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num" aria-hidden="true">4</div>
+        <img src="Creative-Content/Icons/Proses Laundry.png" alt="" class="step-icon"
+          onerror="this.outerHTML='<div class=\'step-icon-ph\' aria-hidden=\'true\'>👕</div>'" />
+        <h4>Pakaian diproses</h4>
+        <p>Dicuci dan disetrika dengan bahan ramah lingkungan dan mesin berstandar profesional.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num" aria-hidden="true">5</div>
+        <img src="Creative-Content/Icons/Notifikasi - Tracking 1.png" alt="" class="step-icon"
+          onerror="this.outerHTML='<div class=\'step-icon-ph\' aria-hidden=\'true\'>🔔</div>'" />
+        <h4>Notifikasi selesai</h4>
+        <p>Notifikasi WhatsApp saat pakaian sudah bersih dan siap dikirim.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num" aria-hidden="true">6</div>
+        <img src="Creative-Content/Icons/Delivery.png" alt="" class="step-icon"
+          onerror="this.outerHTML='<div class=\'step-icon-ph\' aria-hidden=\'true\'>🚪</div>'" />
+        <h4>Pakaian diantar</h4>
+        <p>Pakaian bersih dikembalikan ke rumahmu tepat waktu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ABOUT ══════════════ -->
+<section id="tentang-kalaklin" class="section-pad anchor-target">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Tentang Kalaklin</h2>
+        <p>
+          Kalaklin hadir sebagai solusi laundry digital hyperlocal berbasis WhatsApp tanpa ribet,
+          siap melayani 24 jam dengan memadukan ketepatan waktu (<em>Kala</em>) dan memberikan jaminan
+          kebersihan maksimal (<em>Clean</em>). Cukup lewat chat dari rumah, Anda mendapatkan layanan
+          cuci praktis yang aman untuk kulit sensitif, sekaligus ikut menjaga bumi berkat penggunaan
+          deterjen ramah lingkungan dan Reusable Canvas Laundry Bag.
+        </p>
+        <a href="https://wa.me/6281234567890?text=Halo%20Kalaklin%2C%20saya%20ingin%20cek%20apakah%20alamat%20saya%20masuk%20area%20layanan%20dan%20mengetahui%20paket%20langganan%20yang%20tersedia."
+           target="_blank" rel="noopener noreferrer" class="btn" style="margin-top:28px;display:inline-flex;"
+           onclick="trackEvent('cta_whatsapp_click',{location:'about'})">
+          Hubungi Kami via WhatsApp
+        </a>
+      </div>
+      <div>
+        <div class="about-img">
+          <img src="Creative-Content/Images/Kalaklin-workshop.png" alt="Workshop laundry Kalaklin"
+            onerror="this.parentElement.outerHTML='<div class=\'about-img-ph\'>[PLACEHOLDER: Kalaklin-workshop.png]<br>Gambar Workshop Laundry</div>'" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FAQ ══════════════ -->
+<section id="faq" class="section-pad anchor-target">
+  <div class="container">
+    <h2 class="section-title" style="text-align:center;">Pertanyaan yang Sering Ditanya</h2>
+    <p class="section-subtitle" style="text-align:center;">Tidak menemukan jawaban? Hubungi kami via WhatsApp.</p>
+    <div class="faq-list" role="list">
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-1" id="faq-btn-1">
+          Apakah Kalaklin tersedia di area saya?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" id="faq-ans-1" role="region" aria-labelledby="faq-btn-1">
+          <div class="faq-answer-inner">Saat ini tersedia di Jakarta Barat — Kebon Jeruk, Tanjung Duren, Palmerah, Puri, Pesanggrahan, dan Kemanggisan. Radius maksimal 10 km dari pusat layanan.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-2" id="faq-btn-2">
+          Apakah saya harus mengunduh aplikasi?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" id="faq-ans-2" role="region" aria-labelledby="faq-btn-2">
+          <div class="faq-answer-inner">Tidak perlu! Kalaklin beroperasi 100% melalui chat WhatsApp. Tidak perlu mengunduh aplikasi tambahan apa pun.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-3" id="faq-btn-3">
+          Bagaimana sistem Reusable Canvas Laundry Bag bekerja?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" id="faq-ans-3" role="region" aria-labelledby="faq-btn-3">
+          <div class="faq-answer-inner">Kami menjamin 100% operasional pengemasan dan distribusi bebas dari kantong plastik sekali pakai. Setiap pelanggan paket langganan akan difasilitasi dengan Reusable Canvas Laundry Bag eksklusif yang ditukarkan secara sirkular pada setiap sesi antar-jemput.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-4" id="faq-btn-4">
+          Apa yang terjadi jika kurir terlambat?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" id="faq-ans-4" role="region" aria-labelledby="faq-btn-4">
+          <div class="faq-answer-inner">Kalaklin berkomitmen memberikan layanan antar-jemput terbaik dan tepat waktu. Jika kami terlambat menjemput, kami akan memberikan voucher khusus sebagai bentuk permohonan maaf dan tanggung jawab kami.</div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-5" id="faq-btn-5">
+          Berapa lama estimasi pengerjaan?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer" id="faq-ans-5" role="region" aria-labelledby="faq-btn-5">
+          <div class="faq-answer-inner">Kalaklin memiliki waktu standar pengerjaan selama 2 hari.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer id="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <img src="Creative-Content/Logo/Logo Brand - KalaKlin (white bg).png" alt="Logo Kalaklin"
+            onerror="this.outerHTML='<div class=\'footer-logo-ph\'>KalaKlin</div>'" />
+        </div>
+        <p class="footer-tagline">Bersih Bajunya, Hijau Buminya,<br>Berseri Hatinya.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="#cara-kerja">Cara Kerja</a></li>
+          <li><a href="#paket">Paket Langganan</a></li>
+          <li><a href="#tentang-kalaklin">Tentang Kalaklin</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hubungi Kami</h4>
+        <ul>
+          <li><a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+          <li><a href="https://instagram.com/kala_klin" target="_blank" rel="noopener noreferrer">@kala_klin</a></li>
+        </ul>
+        <div class="social-links" style="margin-top:16px;">
+          <!-- Instagram -->
+          <a href="https://instagram.com/kala_klin" target="_blank" rel="noopener noreferrer"
+             class="social-link" aria-label="Instagram Kalaklin">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="white" stroke="none"/></svg>
+          </a>
+          <!-- Facebook -->
+          <a href="https://facebook.com/kalaklin" target="_blank" rel="noopener noreferrer"
+             class="social-link" aria-label="Facebook Kalaklin">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="https://linkedin.com/company/kalaklin" target="_blank" rel="noopener noreferrer"
+             class="social-link" aria-label="LinkedIn Kalaklin">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Area Layanan</h4>
+        <ul>
+          <li><a href="#hero">Kebon Jeruk</a></li>
+          <li><a href="#hero">Tanjung Duren</a></li>
+          <li><a href="#hero">Palmerah</a></li>
+          <li><a href="#hero">Puri &amp; Pesanggrahan</a></li>
+          <li><a href="#hero">Kemanggisan</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">© 2024 Kalaklin. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- ══════════════ MODALS ══════════════ -->
+
+<!-- Success Modal -->
+<div class="modal-overlay" id="modal-success" role="dialog" aria-modal="true" aria-labelledby="modal-success-title">
+  <div class="modal-box">
+    <button class="modal-close" id="modal-success-close" aria-label="Tutup">×</button>
+    <div class="modal-icon">🎉</div>
+    <h2 class="modal-title" id="modal-success-title">Terima kasih!</h2>
+    <p class="modal-body">
+      Kamu telah terdaftar. Pantau DM Instagram mu, penawaran early-bird eksklusif akan dikirim sebelum launching.
+    </p>
+    <button class="btn btn-full" id="modal-success-btn">Oke, Siap!</button>
+  </div>
+</div>
+
+<!-- Privacy Policy Modal -->
+<div class="modal-overlay" id="modal-privacy" role="dialog" aria-modal="true" aria-labelledby="modal-privacy-title">
+  <div class="modal-box">
+    <button class="modal-close" id="modal-privacy-close" aria-label="Tutup">×</button>
+    <h2 class="modal-title" id="modal-privacy-title">Kebijakan Privasi</h2>
+    <div class="modal-body" style="font-size:14px;line-height:22px;">
+      <p style="margin-bottom:12px;"><strong>Terakhir diperbarui: 2024</strong></p>
+      <p style="margin-bottom:10px;">Kalaklin menghormati privasi Anda. Data yang Anda berikan (Nama dan Akun Instagram) hanya digunakan untuk keperluan komunikasi pre-launch dan pengiriman penawaran early-bird eksklusif.</p>
+      <p style="margin-bottom:10px;"><strong>Data yang dikumpulkan:</strong> Nama lengkap dan akun Instagram.</p>
+      <p style="margin-bottom:10px;"><strong>Penggunaan data:</strong> Menghubungi Anda sebelum dan sesudah peluncuran layanan Kalaklin via Instagram DM atau WhatsApp.</p>
+      <p style="margin-bottom:10px;"><strong>Keamanan data:</strong> Data Anda tidak akan dijual, disewakan, atau dibagikan kepada pihak ketiga.</p>
+      <p>Dengan mendaftar, Anda menyetujui penggunaan data seperti yang dijelaskan di atas. Untuk pertanyaan, hubungi kami via WhatsApp.</p>
+    </div>
+    <button class="btn btn-full" id="modal-privacy-btn">Saya Mengerti</button>
+  </div>
+</div>
+
+<script>
+  /* ── Analytics Placeholder ── */
+  function trackEvent(eventName, params) {
+    // TODO: Replace with GA4 → window.gtag?.('event', eventName, params);
+    // TODO: Replace with Meta Pixel → window.fbq?.('track', eventName, params);
+    console.debug('[Analytics]', eventName, params || {});
+  }
+
+  /* ── Header scroll effect & mobile show ── */
+  const header = document.getElementById('site-header');
+  const ctaMobile = document.getElementById('cta-header-mobile');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 80);
+  }, { passive: true });
+  function updateHeaderMobile() {
+    const isMobile = window.innerWidth < 1024;
+    ctaMobile.style.display = isMobile ? 'inline-flex' : 'none';
+  }
+  updateHeaderMobile();
+  window.addEventListener('resize', updateHeaderMobile);
+
+  /* ── Hamburger menu ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobile-nav');
+  const navOverlay = document.getElementById('nav-overlay');
+  function openMenu() {
+    mobileNav.classList.add('open');
+    mobileNav.setAttribute('aria-hidden', 'false');
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    mobileNav.classList.remove('open');
+    mobileNav.setAttribute('aria-hidden', 'true');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', () => mobileNav.classList.contains('open') ? closeMenu() : openMenu());
+  navOverlay.addEventListener('click', closeMenu);
+  document.querySelectorAll('.mobile-nav-link').forEach(link => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMenu(); closeModal('modal-success'); closeModal('modal-privacy'); } });
+
+  /* ── Modal helpers ── */
+  function openModal(id) {
+    const el = document.getElementById(id);
+    el.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    const focusable = el.querySelectorAll('button, [href], input, [tabindex]:not([tabindex="-1"])');
+    if (focusable.length) focusable[0].focus();
+    // Focus trap
+    el.addEventListener('keydown', trapFocus);
+  }
+  function closeModal(id) {
+    const el = document.getElementById(id);
+    el.classList.remove('open');
+    el.removeEventListener('keydown', trapFocus);
+    if (!document.getElementById('mobile-nav').classList.contains('open')) {
+      document.body.style.overflow = '';
+    }
+  }
+  function trapFocus(e) {
+    if (e.key !== 'Tab') return;
+    const modal = e.currentTarget;
+    const focusable = Array.from(modal.querySelectorAll('button, [href], input, [tabindex]:not([tabindex="-1"])')).filter(el => !el.disabled);
+    if (!focusable.length) return;
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+
+  /* Success modal buttons */
+  document.getElementById('modal-success-close').addEventListener('click', () => { closeModal('modal-success'); resetForm(); });
+  document.getElementById('modal-success-btn').addEventListener('click', () => { closeModal('modal-success'); resetForm(); });
+  /* Close on overlay click */
+  document.getElementById('modal-success').addEventListener('click', function(e) { if (e.target === this) { closeModal('modal-success'); resetForm(); } });
+
+  /* Privacy modal buttons */
+  document.getElementById('modal-privacy-close').addEventListener('click', () => closeModal('modal-privacy'));
+  document.getElementById('modal-privacy-btn').addEventListener('click', () => closeModal('modal-privacy'));
+  document.getElementById('modal-privacy').addEventListener('click', function(e) { if (e.target === this) closeModal('modal-privacy'); });
+
+  /* Privacy link */
+  document.getElementById('privacy-link').addEventListener('click', () => openModal('modal-privacy'));
+  document.getElementById('privacy-link').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal('modal-privacy'); } });
+
+  /* ── Lead Form ── */
+  const form = document.getElementById('lead-form');
+  const inputName = document.getElementById('input-name');
+  const inputIG = document.getElementById('input-instagram');
+  const btnSubmit = document.getElementById('btn-submit');
+  const errName = document.getElementById('err-name');
+  const errIG = document.getElementById('err-instagram');
+
+  function showError(input, errEl, msg) {
+    input.classList.add('error');
+    errEl.textContent = msg;
+    errEl.classList.add('visible');
+  }
+  function clearError(input, errEl) {
+    input.classList.remove('error');
+    errEl.classList.remove('visible');
+  }
+  function resetForm() {
+    form.reset();
+    clearError(inputName, errName);
+    clearError(inputIG, errIG);
+    btnSubmit.disabled = false;
+    btnSubmit.textContent = 'Daftar sekarang →';
+  }
+
+  inputName.addEventListener('input', () => clearError(inputName, errName));
+  inputIG.addEventListener('input', () => clearError(inputIG, errIG));
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    let valid = true;
+    const name = inputName.value.trim();
+    const ig = inputIG.value.trim();
+    if (!name) { showError(inputName, errName, 'Nama tidak boleh kosong.'); valid = false; }
+    if (!ig) { showError(inputIG, errIG, 'Akun Instagram tidak boleh kosong.'); valid = false; }
+    if (!valid) return;
+
+    btnSubmit.disabled = true;
+    btnSubmit.textContent = 'Mendaftar...';
+
+    // TODO: Replace with real endpoint (Google Sheet webhook, CRM API, etc.)
+    await new Promise(r => setTimeout(r, 800));
+
+    trackEvent('form_submit_success', { name, instagram: ig }); // Analytics placeholder
+    openModal('modal-success');
+  });
+
+  /* ── Scroll to form (pricing CTAs) ── */
+  function scrollToForm(btn, packageName) {
+    trackEvent('cta_package_click', { package: packageName }); // Analytics placeholder
+    const el = document.getElementById('daftar');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* ── FAQ Accordion ── */
+  document.querySelectorAll('.faq-question').forEach((btn, index) => {
+    btn.addEventListener('click', () => toggleFAQ(btn, index));
+    btn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFAQ(btn, index); } });
+  });
+  function toggleFAQ(btn, index) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-question').setAttribute('aria-expanded', 'false'); });
+    // Open clicked if was closed
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      trackEvent('faq_open', { index, question: btn.textContent.trim().replace(/\n.*/,'') }); // Analytics placeholder
+    }
+  }
+
+  /* ── IntersectionObserver for scroll-depth analytics ── */
+  const observeOnce = (id, eventName) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        trackEvent(eventName); // Analytics placeholder
+        obs.disconnect();
+      }
+    }, { threshold: 0.2 });
+    obs.observe(el);
+  };
+  observeOnce('paket', 'scroll_depth_pricing');
+  observeOnce('faq', 'scroll_depth_faq');
+</script>
+</body>
+</html>
