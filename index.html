@@ -19,7 +19,7 @@
       --white: #FFFFFF;
       --error: #DC2626;
       --font: 'Montserrat', sans-serif;
-      --header-h: 72px;
+      --header-h: 120px;
     }
     html { scroll-behavior: smooth; }
     body { font-family: var(--font); color: var(--brand-primary); background: var(--white); overflow-x: hidden; }
@@ -50,7 +50,7 @@
       background: rgba(255,255,255,.95); backdrop-filter: blur(8px); transition: box-shadow .2s; }
     #site-header.scrolled { box-shadow: 0 2px 16px rgba(0,84,77,.12); }
     .header-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
-    .header-logo img { height: 56px; width: auto; }
+    .header-logo img { height: 112px; width: auto; }
     .header-nav { display: flex; align-items: center; gap: 32px; margin-left: auto; }
     .header-nav a { font-size: 15px; font-weight: 500; color: var(--brand-primary); transition: opacity .15s; }
     .header-nav a:hover { opacity: .7; }
@@ -144,8 +144,8 @@
     .pricing-detail { font-size: 14px; line-height: 22px; opacity: .8; flex: 1; }
     .promo-callout { background: #fff4f0; border: 2px solid var(--brand-accent); border-radius: 16px; padding: 32px 36px;
       display: flex; align-items: center; gap: 32px; }
-    .promo-mascot { width: 100px; flex-shrink: 0; }
-    .promo-mascot-ph { width: 100px; height: 100px; flex-shrink: 0; border-radius: 12px; background: var(--brand-surface);
+    .promo-mascot { width: 300px; flex-shrink: 0; }
+    .promo-mascot-ph { width: 300px; height: 300px; flex-shrink: 0; border-radius: 12px; background: var(--brand-surface);
       display: flex; align-items: center; justify-content: center; font-size: 36px; }
     .promo-text h4 { font-size: 18px; font-weight: 700; color: var(--brand-accent); margin-bottom: 8px; }
     .promo-text p { font-size: 14px; line-height: 22px; margin-bottom: 16px; }
@@ -167,7 +167,7 @@
     #tentang-kalaklin { background: var(--white); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
     .about-text h2 { font-size: 32px; font-weight: 800; margin-bottom: 20px; }
-    .about-text p { font-size: 16px; line-height: 26px; opacity: .85; }
+    .about-text p { font-size: 16px; line-height: 26px; opacity: .85; text-align: justify; }
     .about-img { border-radius: 20px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,84,77,.12); }
     .about-img img { width: 100%; height: 360px; object-fit: cover; }
     .about-img-ph { width: 100%; height: 360px; background: var(--brand-surface); border-radius: 20px;
@@ -189,8 +189,8 @@
 
     /* ── Footer ── */
     #site-footer { background: var(--brand-primary); color: var(--white); padding: 64px 0 0; }
-    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 48px; }
-    .footer-logo img { height: 44px; margin-bottom: 12px; filter: brightness(0) invert(1); }
+    .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding-bottom: 48px; }
+    .footer-logo img { height: 80px; width: auto; filter: brightness(0) invert(1); margin-bottom: 0; }
     .footer-logo-ph { height: 40px; background: rgba(255,255,255,.2); border-radius: 6px; display: flex;
       align-items: center; padding: 0 12px; font-weight: 800; font-size: 18px; color: var(--white);
       width: fit-content; margin-bottom: 12px; }
@@ -237,7 +237,7 @@
       .vp-grid { grid-template-columns: 1fr; gap: 40px; }
       .pricing-grid { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 32px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
     }
     @media (max-width: 767px) {
       .section-title { font-size: 26px; }
@@ -357,8 +357,7 @@
       <!-- Right: Lead Form -->
       <div>
         <div class="form-card" role="form" aria-label="Form Pendaftaran Waitlist">
-          <h3>Daftar Waiting List Sekarang</h3>
-          <p>Jadilah yang pertama merasakan layanan Kalaklin. Gratis, tanpa komitmen.</p>
+          <h3>Daftar Sekarang</h3>
           <form id="lead-form" novalidate>
             <div class="form-field">
               <label for="input-name">Nama</label>
@@ -389,26 +388,30 @@
 <section id="mengapa" class="section-pad anchor-target">
   <div class="container">
     <h2 class="section-title" style="text-align:center;">Sering Mengalami Masalah Seperti Ini?</h2>
-    <p class="section-subtitle" style="text-align:center;">Kamu tidak sendirian — banyak yang merasakannya</p>
+
+    <!-- Mascot Kala menjelaskan problem -->
+    <div style="display:flex;justify-content:center;margin:24px 0 32px;">
+      <img src="Creative-Content/Mascot/Main Mascot.png" alt="Maskot Kala menjelaskan masalah laundry"
+        style="width:200px;height:auto;"
+        onerror="this.style.display='none'" />
+    </div>
+
     <div class="problem-grid">
       <div class="problem-card">
-        <div class="problem-card-icon-ph" aria-hidden="true">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
+        <img src="Creative-Content/Icons/tidak-punya-waktu.png" alt="" class="problem-card-icon"
+          onerror="this.outerHTML='<div class=\'problem-card-icon-ph\'><svg width=\'40\' height=\'40\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'var(--brand-primary)\' stroke-width=\'1.8\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><circle cx=\'12\' cy=\'12\' r=\'10\'/><polyline points=\'12 6 12 12 16 14\'/></svg></div>'" />
         <h4>Tidak Punya Waktu</h4>
         <p>Merasa capek dan tidak memiliki waktu untuk mencuci baju.</p>
       </div>
       <div class="problem-card">
-        <div class="problem-card-icon-ph" aria-hidden="true">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </div>
+        <img src="Creative-Content/Icons/khawatir-kesehatan-kulit.png" alt="" class="problem-card-icon"
+          onerror="this.outerHTML='<div class=\'problem-card-icon-ph\'><svg width=\'40\' height=\'40\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'var(--brand-primary)\' stroke-width=\'1.8\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><path d=\'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z\'/></svg></div>'" />
         <h4>Khawatir Kesehatan Kulit</h4>
         <p>Kekhawatiran tentang kesehatan kulit pada keluarga akibat deterjen keras.</p>
       </div>
       <div class="problem-card">
-        <div class="problem-card-icon-ph" aria-hidden="true">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-        </div>
+        <img src="Creative-Content/Icons/sampah-plastik-menumpuk.png" alt="" class="problem-card-icon"
+          onerror="this.outerHTML='<div class=\'problem-card-icon-ph\'><svg width=\'40\' height=\'40\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'var(--brand-primary)\' stroke-width=\'1.8\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><polyline points=\'3 6 5 6 21 6\'/><path d=\'M19 6l-1 14H6L5 6\'/><path d=\'M10 11v6\'/><path d=\'M14 11v6\'/><path d=\'M9 6V4h6v2\'/></svg></div>'" />
         <h4>Sampah Plastik Menumpuk</h4>
         <p>Menumpuknya sampah plastik dari kemasan laundry konvensional.</p>
       </div>
@@ -458,18 +461,23 @@
 <section id="paket" class="section-pad anchor-target">
   <div class="container">
     <h2 class="section-title" style="text-align:center;">Paket Langganan</h2>
-    <p class="section-subtitle" style="text-align:center;">Pilih paket yang sesuai kebutuhanmu, mulai setelah launch!</p>
+    <!-- Mascot Laundry di atas paket -->
+    <div style="display:flex;justify-content:center;margin:8px 0 32px;">
+      <img src="Creative-Content/Mascot/Laundry.png" alt="Maskot Kala dengan laundry"
+        style="width:160px;height:auto;"
+        onerror="this.style.display='none'" />
+    </div>
     <div class="pricing-grid">
       <div class="pricing-card">
         <div class="pricing-name">Eco-Simpel</div>
         <div class="pricing-price">Rp 180.000<span>/bulan</span></div>
-        <p class="pricing-detail">Cuci Kering Lipat, maksimal 20 kg atau 4× jemput-antar per bulan. Cocok untuk kamu yang tinggal sendiri atau pasangan muda.</p>
+        <p class="pricing-detail">Cuci Kering Lipat, maksimal 20 kg atau 4× jemput-antar per bulan.</p>
         <button class="btn" onclick="scrollToForm(this,'Eco-Simpel')">Daftar Sekarang</button>
       </div>
       <div class="pricing-card">
         <div class="pricing-name">Eco-Family &amp; Premium</div>
         <div class="pricing-price">Rp 240.000<span>/bulan</span></div>
-        <p class="pricing-detail">Cuci Kering Setrika, maksimal 20 kg atau 4× jemput-antar, termasuk setrika uap rapi. Ideal untuk keluarga dan profesional sibuk.</p>
+        <p class="pricing-detail">Cuci Kering Setrika, maksimal 20 kg atau 4× jemput-antar.</p>
         <button class="btn" onclick="scrollToForm(this,'Eco-Family & Premium')">Daftar Sekarang</button>
       </div>
     </div>
@@ -565,8 +573,7 @@
 <!-- ══════════════ FAQ ══════════════ -->
 <section id="faq" class="section-pad anchor-target">
   <div class="container">
-    <h2 class="section-title" style="text-align:center;">Pertanyaan yang Sering Ditanya</h2>
-    <p class="section-subtitle" style="text-align:center;">Tidak menemukan jawaban? Hubungi kami via WhatsApp.</p>
+    <h2 class="section-title" style="text-align:center;">FAQ</h2>
     <div class="faq-list" role="list">
 
       <div class="faq-item" role="listitem">
@@ -634,7 +641,6 @@
           <img src="Creative-Content/Logo/Logo Brand - KalaKlin.png" alt="Logo Kalaklin"
             onerror="this.outerHTML='<div class=\'footer-logo-ph\'>KalaKlin</div>'" />
         </div>
-        <p class="footer-tagline">Bersih Bajunya, Hijau Buminya,<br>Berseri Hatinya.</p>
       </div>
       <div class="footer-col">
         <h4>Navigasi</h4>
@@ -645,40 +651,21 @@
           <li><a href="#faq">FAQ</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4>Hubungi Kami</h4>
-        <ul>
-          <li><a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
-          <li><a href="https://instagram.com/kala_klin" target="_blank" rel="noopener noreferrer">@kala_klin</a></li>
-        </ul>
-        <div class="social-links" style="margin-top:16px;">
-          <!-- Instagram -->
-          <a href="https://instagram.com/kala_klin" target="_blank" rel="noopener noreferrer"
-             class="social-link" aria-label="Instagram Kalaklin">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="white" stroke="none"/></svg>
-          </a>
-          <!-- Facebook -->
-          <a href="https://facebook.com/kalaklin" target="_blank" rel="noopener noreferrer"
-             class="social-link" aria-label="Facebook Kalaklin">
-            <svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-          <!-- LinkedIn -->
-          <a href="https://linkedin.com/company/kalaklin" target="_blank" rel="noopener noreferrer"
-             class="social-link" aria-label="LinkedIn Kalaklin">
-            <svg viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Area Layanan</h4>
-        <ul>
-          <li><a href="#hero">Kebon Jeruk</a></li>
-          <li><a href="#hero">Tanjung Duren</a></li>
-          <li><a href="#hero">Palmerah</a></li>
-          <li><a href="#hero">Puri &amp; Pesanggrahan</a></li>
-          <li><a href="#hero">Kemanggisan</a></li>
-        </ul>
-      </div>
+    </div>
+    <!-- Social icons row -->
+    <div style="display:flex;justify-content:center;gap:16px;padding-bottom:32px;">
+      <a href="https://instagram.com/kala_klin" target="_blank" rel="noopener noreferrer"
+         class="social-link" aria-label="Instagram Kalaklin">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="white" stroke="none"/></svg>
+      </a>
+      <a href="https://facebook.com/kalaklin" target="_blank" rel="noopener noreferrer"
+         class="social-link" aria-label="Facebook Kalaklin">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://linkedin.com/company/kalaklin" target="_blank" rel="noopener noreferrer"
+         class="social-link" aria-label="LinkedIn Kalaklin">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -814,10 +801,14 @@
     input.classList.remove('error');
     errEl.classList.remove('visible');
   }
+  const errPrivacy = document.getElementById('err-privacy');
+  const checkPrivacy = document.getElementById('privacy-agree');
+
   function resetForm() {
     form.reset();
     clearError(inputName, errName);
     clearError(inputIG, errIG);
+    errPrivacy.classList.remove('visible');
     btnSubmit.disabled = false;
     btnSubmit.textContent = 'Daftar sekarang →';
     const errBox = document.getElementById('form-submit-error');
@@ -826,6 +817,7 @@
 
   inputName.addEventListener('input', () => clearError(inputName, errName));
   inputIG.addEventListener('input', () => clearError(inputIG, errIG));
+  checkPrivacy.addEventListener('change', () => { if (checkPrivacy.checked) errPrivacy.classList.remove('visible'); });
 
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -834,6 +826,7 @@
     const ig = inputIG.value.trim();
     if (!name) { showError(inputName, errName, 'Nama tidak boleh kosong.'); valid = false; }
     if (!ig) { showError(inputIG, errIG, 'Akun Instagram tidak boleh kosong.'); valid = false; }
+    if (!checkPrivacy.checked) { errPrivacy.classList.add('visible'); valid = false; }
     if (!valid) return;
 
     btnSubmit.disabled = true;
