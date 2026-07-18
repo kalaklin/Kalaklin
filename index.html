@@ -218,6 +218,11 @@
     /* anchor offset for sticky header */
     .anchor-target { scroll-margin-top: calc(var(--header-h) + 16px); }
 
+    /* Loading spinner di tombol submit */
+    .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.4);
+      border-top-color: #fff; border-radius: 50%; animation: spin .6s linear infinite; vertical-align: middle; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
     /* ── Responsive ── */
     @media (max-width: 1023px) {
       .header-nav { display: none; }
@@ -806,6 +811,8 @@
     clearError(inputIG, errIG);
     btnSubmit.disabled = false;
     btnSubmit.textContent = 'Daftar sekarang →';
+    const errBox = document.getElementById('form-submit-error');
+    if (errBox) errBox.textContent = '';
   }
 
   inputName.addEventListener('input', () => clearError(inputName, errName));
@@ -821,13 +828,47 @@
     if (!valid) return;
 
     btnSubmit.disabled = true;
-    btnSubmit.textContent = 'Mendaftar...';
+    btnSubmit.innerHTML = '<span class="spinner" aria-hidden="true"></span> Mengirim...';
 
-    // TODO: Replace with real endpoint (Google Sheet webhook, CRM API, etc.)
-    await new Promise(r => setTimeout(r, 800));
+    const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzG_8U90kK9O146rY4bD9JzXSrVW5yGgK8htkd-gfp1bVdL640cMyPHsqOO1ow0OJGi3Q/exec';
 
-    trackEvent('form_submit_success', { name, instagram: ig }); // Analytics placeholder
-    openModal('modal-success');
+    try {
+      const payload = JSON.stringify({
+        nama: name,
+        instagram: ig,
+        timestamp: new Date().toISOString()
+      });
+
+      const res = await fetch(SHEET_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: payload
+      });
+
+      const json = await res.json();
+
+      if (json.result === 'success' || res.ok) {
+        trackEvent('form_submit_success', { name, instagram: ig }); // Analytics placeholder
+        openModal('modal-success');
+      } else {
+        throw new Error(json.error || 'Respons tidak dikenali dari server.');
+      }
+    } catch (err) {
+      console.error('[Kalaklin Form]', err);
+      // Tampilkan pesan error inline di bawah tombol submit
+      let errBox = document.getElementById('form-submit-error');
+      if (!errBox) {
+        errBox = document.createElement('p');
+        errBox.id = 'form-submit-error';
+        errBox.style.cssText = 'font-size:13px;color:#DC2626;margin-top:10px;text-align:center;';
+        btnSubmit.parentNode.insertBefore(errBox, btnSubmit.nextSibling);
+      }
+      errBox.textContent = 'Oops, gagal mengirim. Coba lagi beberapa saat.';
+      setTimeout(() => { if (errBox) errBox.textContent = ''; }, 5000);
+      // Kembalikan tombol ke keadaan semula
+      btnSubmit.disabled = false;
+      btnSubmit.textContent = 'Daftar sekarang →';
+    }
   });
 
   /* ── Scroll to form (pricing CTAs) ── */
