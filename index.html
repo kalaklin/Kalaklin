@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="Creative-Content/Logo/Logo Brand - KalaKlin.png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -49,8 +50,8 @@
       background: rgba(255,255,255,.95); backdrop-filter: blur(8px); transition: box-shadow .2s; }
     #site-header.scrolled { box-shadow: 0 2px 16px rgba(0,84,77,.12); }
     .header-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
-    .header-logo img { height: 44px; width: auto; }
-    .header-nav { display: flex; align-items: center; gap: 32px; }
+    .header-logo img { height: 56px; width: auto; }
+    .header-nav { display: flex; align-items: center; gap: 32px; margin-left: auto; }
     .header-nav a { font-size: 15px; font-weight: 500; color: var(--brand-primary); transition: opacity .15s; }
     .header-nav a:hover { opacity: .7; }
     .hamburger { display: none; flex-direction: column; gap: 5px; padding: 10px; cursor: pointer; background: none; border: none; }
@@ -74,8 +75,8 @@
     .hero-inner { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 60px 0; }
     .hero-headline { font-size: 60px; font-weight: 800; line-height: 1.12; letter-spacing: -.02em; color: var(--white); max-width: 820px; }
     .hero-tagline { font-size: 20px; line-height: 28px; color: var(--white); opacity: .9; max-width: 540px; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,.2);
-      color: var(--white); font-weight: 600; font-size: 14px; padding: 6px 16px; border-radius: 999px; backdrop-filter: blur(4px); }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.2);
+      color: var(--white); font-weight: 700; font-size: 18px; padding: 10px 24px; border-radius: 999px; backdrop-filter: blur(4px); letter-spacing: .01em; }
     .hero-badge svg { flex-shrink: 0; }
     .hero-mascot { width: 280px; margin-top: 8px; }
 
@@ -91,11 +92,17 @@
     .vp-item-text strong { display: block; font-weight: 700; font-size: 15px; }
     .vp-item-text span { font-size: 14px; opacity: .8; }
 
-    /* Form Card */
     .form-card { background: var(--white); border: 2px solid var(--brand-primary); border-radius: 16px; padding: 36px 32px; }
-    .form-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
-    .form-card p { font-size: 14px; opacity: .75; margin-bottom: 24px; }
-    .form-field { margin-bottom: 18px; }
+    .form-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 6px; text-align: center; }
+    .form-card > p { font-size: 14px; opacity: .75; margin-bottom: 24px; text-align: center; }
+    /* Privacy checkbox row */
+    .privacy-check { display: flex; align-items: flex-start; gap: 10px; margin-top: 14px; }
+    .privacy-check input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px;
+      accent-color: var(--brand-primary); cursor: pointer; }
+    .privacy-check label { font-size: 13px; line-height: 1.5; color: var(--brand-primary); cursor: pointer; }
+    .privacy-check label a { color: var(--brand-link); text-decoration: underline; }
+    .field-error-check { font-size: 12px; color: var(--error); margin-top: 4px; display: none; }
+    .field-error-check.visible { display: block; }
     .form-field label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
     .form-field input { width: 100%; background: var(--brand-surface); border: 2px solid transparent;
       border-radius: 8px; padding: 11px 14px; font-family: var(--font); font-size: 15px; color: var(--brand-primary);
@@ -291,7 +298,7 @@
     <h1 class="hero-headline">24 Jam Siap Melayani,<br>100% Bersih, 0% Plastik!</h1>
     <p class="hero-tagline">Bersih Bajunya, Hijau Buminya, Berseri Hatinya</p>
     <div class="hero-badge">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
       Jakarta Barat
     </div>
     <img
@@ -350,7 +357,7 @@
       <!-- Right: Lead Form -->
       <div>
         <div class="form-card" role="form" aria-label="Form Pendaftaran Waitlist">
-          <h3>Daftar Waitlist Sekarang</h3>
+          <h3>Daftar Waiting List Sekarang</h3>
           <p>Jadilah yang pertama merasakan layanan Kalaklin. Gratis, tanpa komitmen.</p>
           <form id="lead-form" novalidate>
             <div class="form-field">
@@ -363,11 +370,14 @@
               <input type="text" id="input-instagram" name="instagram" placeholder="@username" autocomplete="off" />
               <div class="field-error" id="err-instagram" role="alert">Akun Instagram tidak boleh kosong.</div>
             </div>
-            <button type="submit" class="btn btn-full" id="btn-submit">Daftar sekarang →</button>
-            <p class="form-privacy">
-              Dengan mendaftar, kamu setuju dengan
-              <a id="privacy-link" role="button" tabindex="0" aria-haspopup="dialog">Kebijakan Privasi</a> kami.
-            </p>
+            <div class="privacy-check">
+              <input type="checkbox" id="privacy-agree" name="privacy-agree" />
+              <label for="privacy-agree">
+                Saya setuju dengan <a id="privacy-link" role="button" tabindex="0" aria-haspopup="dialog">Kebijakan Privasi</a> Kalaklin.
+              </label>
+            </div>
+            <div class="field-error-check" id="err-privacy" role="alert">Kamu harus menyetujui kebijakan privasi.</div>
+            <button type="submit" class="btn btn-full" id="btn-submit" style="margin-top:18px;">Daftar sekarang →</button>
           </form>
         </div>
       </div>
@@ -702,7 +712,6 @@
       <p style="margin-bottom:10px;"><strong>Data yang dikumpulkan:</strong> Nama lengkap dan akun Instagram.</p>
       <p style="margin-bottom:10px;"><strong>Penggunaan data:</strong> Menghubungi Anda sebelum dan sesudah peluncuran layanan Kalaklin via Instagram DM atau WhatsApp.</p>
       <p style="margin-bottom:10px;"><strong>Keamanan data:</strong> Data Anda tidak akan dijual, disewakan, atau dibagikan kepada pihak ketiga.</p>
-      <p>Dengan mendaftar, Anda menyetujui penggunaan data seperti yang dijelaskan di atas. Untuk pertanyaan, hubungi kami via WhatsApp.</p>
     </div>
     <button class="btn btn-full" id="modal-privacy-btn">Saya Mengerti</button>
   </div>
