@@ -71,8 +71,10 @@
 
     /* ── Hero ── */
     #hero { min-height: 100vh; padding-top: var(--header-h); display: flex; align-items: center; justify-content: center;
-      background: url('Creative-Content/Images/Kalaklin-workshop.png') center/cover no-repeat;
-      position: relative; text-align: center; }
+      background: linear-gradient(160deg, #00544D 0%, #007A70 40%, #00A896 70%, #E8EFED 100%);
+      position: relative; text-align: center; transition: background .3s; }
+    #hero.img-loaded { background-image: url('Creative-Content/Images/Kalaklin-workshop.png');
+      background-size: cover; background-position: center; background-repeat: no-repeat; }
     #hero::before { content: ''; position: absolute; inset: 0;
       background: linear-gradient(160deg, rgba(0,84,77,.82) 0%, rgba(0,122,112,.72) 50%, rgba(0,168,150,.55) 100%);
       z-index: 0; }
@@ -122,7 +124,10 @@
     /* ── Problem & Why ── */
     #mengapa { background: var(--brand-surface); }
     .problem-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-    .problem-card { background: var(--white); border-radius: 16px; padding: 28px 24px; text-align: center; box-shadow: 0 2px 12px rgba(0,84,77,.06); }
+    .problem-card { background: var(--white); border-radius: 16px; padding: 28px 24px; text-align: center;
+      box-shadow: 0 2px 12px rgba(0,84,77,.06); border: 2px solid transparent;
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+    .problem-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,84,77,.14); border-color: var(--brand-primary); }
     .problem-card-icon { width: 72px; height: 72px; object-fit: contain; margin: 0 auto 16px; }
     .problem-card-icon-ph { width: 72px; height: 72px; border-radius: 12px; background: var(--brand-surface);
       margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; }
@@ -141,8 +146,14 @@
     #paket { background: var(--white); }
     .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 36px; }
     .pricing-card { border: 2px solid var(--brand-primary); border-radius: 16px; padding: 36px 32px;
-      display: flex; flex-direction: column; gap: 16px; }
+      display: flex; flex-direction: column; gap: 16px;
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+    .pricing-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 48px rgba(0,84,77,.18); border-color: var(--brand-accent); }
+    .pricing-card:hover .btn { filter: brightness(.88); }
+    .pricing-card-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .pricing-name { font-size: 20px; font-weight: 700; }
+    .pricing-type-badge { font-size: 11px; font-weight: 700; background: var(--brand-surface);
+      color: var(--brand-primary); padding: 4px 10px; border-radius: 999px; white-space: nowrap; flex-shrink: 0; }
     .pricing-price { font-size: 32px; font-weight: 800; color: var(--brand-accent); }
     .pricing-price span { font-size: 16px; font-weight: 500; color: var(--brand-primary); opacity: .7; }
     .pricing-detail { font-size: 14px; line-height: 22px; opacity: .8; flex: 1; }
@@ -156,16 +167,20 @@
 
     /* ── How It Works ── */
     #cara-kerja { background: var(--brand-surface); }
-    .steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
-    .step-card { background: var(--white); border-radius: 16px; padding: 28px 24px; position: relative; }
-    .step-num { width: 32px; height: 32px; background: var(--brand-primary); color: var(--white);
+    .steps-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 16px; }
+    .step-card { background: var(--white); border-radius: 16px; padding: 24px 16px; position: relative;
+      text-align: center; transition: transform .3s ease, box-shadow .3s ease, border .3s ease;
+      border: 2px solid transparent; }
+    .step-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,84,77,.15); border-color: var(--brand-primary); }
+    .step-card:hover .step-num { background: var(--brand-accent); }
+    .step-num { width: 36px; height: 36px; background: var(--brand-primary); color: var(--white);
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 800; margin-bottom: 14px; }
-    .step-icon { width: 52px; height: 52px; object-fit: contain; margin-bottom: 14px; }
-    .step-icon-ph { width: 52px; height: 52px; border-radius: 10px; background: var(--brand-surface);
-      display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 14px; }
-    .step-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-    .step-card p { font-size: 13px; line-height: 20px; opacity: .8; }
+      font-size: 14px; font-weight: 800; margin: 0 auto 14px; transition: background .3s; }
+    .step-icon { width: 80px; height: 80px; object-fit: contain; margin: 0 auto 14px; }
+    .step-icon-ph { width: 80px; height: 80px; border-radius: 10px; background: var(--brand-surface);
+      display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto 14px; }
+    .step-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+    .step-card p { font-size: 12px; line-height: 18px; opacity: .8; }
 
     /* ── About ── */
     #tentang-kalaklin { background: var(--white); }
@@ -192,25 +207,24 @@
     .faq-item.open .faq-answer { max-height: 300px; }
 
     /* ── Footer ── */
-    #site-footer { background: var(--brand-primary); color: var(--white); padding: 48px 0 0; }
-    .footer-grid { display: flex; align-items: flex-start; gap: 48px; padding-bottom: 40px; }
+    #site-footer { background: var(--brand-primary); color: var(--white); }
+    .footer-main { display: flex; align-items: center; justify-content: space-between;
+      height: var(--header-h); padding: 0 24px; gap: 24px; }
     .footer-logo { flex-shrink: 0; }
-    .footer-logo img { height: 200px; width: auto; filter: brightness(0) invert(1); margin-bottom: 0; }
-    .footer-logo-ph { height: 40px; background: rgba(255,255,255,.2); border-radius: 6px; display: flex;
-      align-items: center; padding: 0 12px; font-weight: 800; font-size: 18px; color: var(--white);
-      width: fit-content; margin-bottom: 12px; }
-    .footer-tagline { font-size: 13px; opacity: .7; line-height: 20px; }
-    .footer-col h4 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
-      opacity: .6; margin-bottom: 16px; }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col ul li a { font-size: 14px; opacity: .85; transition: opacity .15s; }
-    .footer-col ul li a:hover { opacity: 1; }
-    .social-links { display: flex; gap: 12px; margin-top: 8px; }
-    .social-link { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,.15);
+    .footer-logo img { height: 44px; width: auto; filter: brightness(0) invert(1); }
+    .footer-logo-ph { font-weight: 800; font-size: 18px; color: var(--white); }
+    .footer-nav { display: flex; align-items: center; gap: 24px; }
+    .footer-nav a { font-size: 14px; font-weight: 500; color: rgba(255,255,255,.85);
+      transition: color .15s; white-space: nowrap; }
+    .footer-nav a:hover { color: var(--white); }
+    .footer-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+    .footer-social { display: flex; gap: 10px; align-items: center; }
+    .social-link { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,255,255,.15);
       display: flex; align-items: center; justify-content: center; transition: background .15s; }
     .social-link:hover { background: rgba(255,255,255,.3); }
-    .social-link svg { width: 18px; height: 18px; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,.15); padding: 20px 0; text-align: center; font-size: 13px; opacity: .6; }
+    .social-link svg { width: 16px; height: 16px; }
+    .footer-copy { font-size: 12px; opacity: .55; white-space: nowrap; }
+    .footer-bottom { display: none; }
 
     /* ── Modal ── */
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 200;
@@ -248,9 +262,11 @@
       .section-title { font-size: 26px; }
       .hero-headline { font-size: 34px; }
       .problem-grid { grid-template-columns: 1fr; }
-      .steps-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: repeat(3,1fr); }
       .promo-callout { flex-direction: column; text-align: center; gap: 20px; }
-      .footer-grid { flex-direction: column; align-items: flex-start; gap: 24px; }
+      .footer-main { flex-direction: column; height: auto; padding: 24px 16px; gap: 20px; text-align: center; }
+      .footer-nav { flex-wrap: wrap; justify-content: center; gap: 12px; }
+      .footer-right { flex-direction: column; gap: 12px; align-items: center; }
       .modal-box { padding: 32px 24px; }
       .section-pad { padding: 60px 0; }
     }
@@ -329,12 +345,7 @@
           <li class="vp-item">
             <img src="Creative-Content/Icons/Layanan 24 jam.png" alt="" class="vp-icon"
               onerror="this.outerHTML='<div class=\'vp-icon-placeholder\'><svg width=\'22\' height=\'22\' fill=\'none\' stroke=\'var(--brand-primary)\' stroke-width=\'2\' viewBox=\'0 0 24 24\'><circle cx=\'12\' cy=\'12\' r=\'10\'/><polyline points=\'12 6 12 12 16 14\'/></svg></div>'" />
-            <div class="vp-item-text"><strong>Layanan 24 jam</strong><span>Siap melayani kapan pun kamu butuh</span></div>
-          </li>
-          <li class="vp-item">
-            <img src="Creative-Content/Icons/Delivery.png" alt="" class="vp-icon"
-              onerror="this.outerHTML='<div class=\'vp-icon-placeholder\'><svg width=\'22\' height=\'22\' fill=\'none\' stroke=\'var(--brand-primary)\' stroke-width=\'2\' viewBox=\'0 0 24 24\'><rect x=\'1\' y=\'3\' width=\'15\' height=\'13\'/><polygon points=\'16 8 20 8 23 11 23 16 16 16 16 8\'/><circle cx=\'5.5\' cy=\'18.5\' r=\'2.5\'/><circle cx=\'18.5\' cy=\'18.5\' r=\'2.5\'/></svg></div>'" />
-            <div class="vp-item-text"><strong>24 jam antar jemput</strong><span>Kurir datang langsung ke depan pintumu</span></div>
+            <div class="vp-item-text"><strong>Layanan 24 jam</strong><span>Kalaklin hadir untuk membantu pelanggan yang memiliki keterbatasan waktu dalam mencuci pakaian. Antar-jemput langsung di depan pintu rumah.</span></div>
           </li>
           <li class="vp-item">
             <img src="Creative-Content/Icons/Jaminan Bersih, Rapi.png" alt="" class="vp-icon"
@@ -430,15 +441,7 @@
             onerror="this.outerHTML='<div class=\'why-icon-ph\' aria-hidden=\'true\'>🕐</div>'" />
           <div>
             <h4>24 jam siap melayani</h4>
-            <p>Kalaklin hadir untuk membantu pelanggan yang memiliki keterbatasan waktu dalam mencuci pakaian.</p>
-          </div>
-        </div>
-        <div class="why-item">
-          <img src="Creative-Content/Icons/Delivery.png" alt="" class="why-icon"
-            onerror="this.outerHTML='<div class=\'why-icon-ph\' aria-hidden=\'true\'>🚗</div>'" />
-          <div>
-            <h4>24 jam antar jemput</h4>
-            <p>Kalaklin memberikan kemudahan layanan antar-jemput langsung di depan pintu rumah atau kos secara terjadwal.</p>
+            <p>Kalaklin hadir untuk membantu pelanggan yang memiliki keterbatasan waktu dalam mencuci pakaian. Antar-jemput langsung di depan pintu rumah.</p>
           </div>
         </div>
         <div class="why-item">
@@ -474,16 +477,22 @@
     </div>
     <div class="pricing-grid">
       <div class="pricing-card">
-        <div class="pricing-name">Eco-Simpel</div>
+        <div class="pricing-card-header">
+          <div class="pricing-name">Eco-Simpel</div>
+          <span class="pricing-type-badge">Cuci Kering Lipat</span>
+        </div>
         <div class="pricing-price">Rp 180.000<span>/bulan</span></div>
-        <p class="pricing-detail"><b>Cuci Kering Lipat</b>, maksimal 20 kg atau 4× jemput-antar per bulan.</p>
-        <button class="btn" onclick="scrollToForm(this,'Eco-Simpel')">Mau Paket Ini</button>
+        <p class="pricing-detail">Maksimal 20 kg atau 4× jemput-antar per bulan.</p>
+        <button class="btn" onclick="scrollToForm(this,'Eco-Simpel')">Daftar Sekarang</button>
       </div>
       <div class="pricing-card">
-        <div class="pricing-name">Eco-Family &amp; Premium</div>
+        <div class="pricing-card-header">
+          <div class="pricing-name">Eco-Family &amp; Premium</div>
+          <span class="pricing-type-badge">Cuci Kering Setrika</span>
+        </div>
         <div class="pricing-price">Rp 240.000<span>/bulan</span></div>
-        <p class="pricing-detail"><b>Cuci Kering Setrika</b>, maksimal 20 kg atau 4× jemput-antar.</p>
-        <button class="btn" onclick="scrollToForm(this,'Eco-Family & Premium')">Mau Paket Ini</button>
+        <p class="pricing-detail">Maksimal 20 kg atau 4× jemput-antar.</p>
+        <button class="btn" onclick="scrollToForm(this,'Eco-Family & Premium')">Daftar Sekarang</button>
       </div>
     </div>
 
@@ -562,7 +571,7 @@
           siap melayani 24 jam</b> dengan memadukan ketepatan waktu (<em>Kala</em>) dan memberikan jaminan
           kebersihan maksimal (<em>Clean</em>). Cukup lewat chat dari rumah, Anda mendapatkan layanan
           cuci praktis yang aman untuk kulit sensitif, sekaligus ikut menjaga bumi berkat penggunaan
-          deterjen ramah lingkungan dan Reusable Canvas Laundry Bag.
+          <b>deterjen ramah lingkungan</b> dan <b>Reusable Canvas Laundry Bag</b>.
         </p>
       </div>
       <div>
@@ -639,42 +648,39 @@
 
 <!-- ══════════════ FOOTER ══════════════ -->
 <footer id="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-logo">
-          <img src="Creative-Content/Logo/Logo Brand - KalaKlin.png" alt="Logo Kalaklin"
-            onerror="this.outerHTML='<div class=\'footer-logo-ph\'>KalaKlin</div>'" />
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Navigasi</h4>
-        <ul>
-          <li><a href="#cara-kerja">Cara Kerja</a></li>
-          <li><a href="#paket">Paket Langganan</a></li>
-          <li><a href="#tentang-kalaklin">Tentang Kalaklin</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </div>
+  <div class="footer-main container">
+    <!-- Kiri: Logo -->
+    <div class="footer-logo">
+      <img src="Creative-Content/Logo/Logo Brand - KalaKlin.png" alt="Logo Kalaklin"
+        onerror="this.outerHTML='<span class=\'footer-logo-ph\'>KalaKlin</span>'" />
     </div>
-    <!-- Social icons row -->
-    <div style="display:flex;justify-content:center;gap:16px;padding-bottom:32px;">
-      <a href="https://instagram.com/kala_klin" target="_blank" rel="noopener noreferrer"
-         class="social-link" aria-label="Instagram Kalaklin">
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="white" stroke="none"/></svg>
-      </a>
-      <a href="https://facebook.com/kalaklin" target="_blank" rel="noopener noreferrer"
-         class="social-link" aria-label="Facebook Kalaklin">
-        <svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-      </a>
-      <a href="https://linkedin.com/company/kalaklin" target="_blank" rel="noopener noreferrer"
-         class="social-link" aria-label="LinkedIn Kalaklin">
-        <svg viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-      </a>
+
+    <!-- Tengah: Nav -->
+    <nav class="footer-nav" aria-label="Navigasi Footer">
+      <a href="#cara-kerja">Cara Kerja</a>
+      <a href="#paket">Paket</a>
+      <a href="#tentang-kalaklin">Tentang Kalaklin</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <!-- Kanan: Sosial + Copyright -->
+    <div class="footer-right">
+      <div class="footer-social">
+        <a href="https://instagram.com/kala_klin" target="_blank" rel="noopener noreferrer"
+           class="social-link" aria-label="Instagram Kalaklin">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="white" stroke="none"/></svg>
+        </a>
+        <a href="https://facebook.com/kalaklin" target="_blank" rel="noopener noreferrer"
+           class="social-link" aria-label="Facebook Kalaklin">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://linkedin.com/company/kalaklin" target="_blank" rel="noopener noreferrer"
+           class="social-link" aria-label="LinkedIn Kalaklin">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+      </div>
+      <span class="footer-copy">© 2026 Kalaklin. All rights reserved.</span>
     </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="container">© 2026 Kalaklin. All rights reserved.</div>
   </div>
 </footer>
 
@@ -710,6 +716,13 @@
 </div>
 
 <script>
+  /* ── Hero background lazy-load ── */
+  (function() {
+    const img = new Image();
+    img.src = 'Creative-Content/Images/Kalaklin-workshop.png';
+    img.onload = () => document.getElementById('hero').classList.add('img-loaded');
+  })();
+
   /* ── Analytics Placeholder ── */
   function trackEvent(eventName, params) {
     // TODO: Replace with GA4 → window.gtag?.('event', eventName, params);
