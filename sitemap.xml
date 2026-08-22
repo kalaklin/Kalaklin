@@ -3,43 +3,43 @@
 
   <!-- Halaman utama -->
   <url>
-    <loc>https://kalaklin.com/</loc>
+    <loc>https://www.kalaklin.my.id/</loc>
     <lastmod>2026-08-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Section anchors — untuk referensi internal -->
+  <!-- Section anchors -->
   <url>
-    <loc>https://kalaklin.com/#daftar</loc>
+    <loc>https://www.kalaklin.my.id/#daftar</loc>
     <lastmod>2026-08-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://kalaklin.com/#paket</loc>
+    <loc>https://www.kalaklin.my.id/#paket</loc>
     <lastmod>2026-08-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://kalaklin.com/#cara-kerja</loc>
+    <loc>https://www.kalaklin.my.id/#cara-kerja</loc>
     <lastmod>2026-08-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://kalaklin.com/#tentang-kalaklin</loc>
+    <loc>https://www.kalaklin.my.id/#tentang-kalaklin</loc>
     <lastmod>2026-08-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://kalaklin.com/#faq</loc>
+    <loc>https://www.kalaklin.my.id/#faq</loc>
     <lastmod>2026-08-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
