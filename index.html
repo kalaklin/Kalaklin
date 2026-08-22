@@ -25,6 +25,7 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1412207127485609&ev=PageView&noscript=1"
 /></noscript>
+fbq('track', 'Lead');
 <!-- End Meta Pixel Code -->
 
   <meta charset="UTF-8" />
@@ -142,6 +143,15 @@ src="https://www.facebook.com/tr?id=1412207127485609&ev=PageView&noscript=1"
       transition: filter .35s ease;
     }
     .section-heading-mascot:hover {
+      filter: drop-shadow(0 8px 16px rgba(0,84,77,.3));
+      animation-play-state: paused;
+    }
+    /* Generic float class for standalone mascots */
+    .mascot-float {
+      animation: float-gentle 4.4s ease-in-out infinite;
+      transition: filter .35s ease;
+    }
+    .mascot-float:hover {
       filter: drop-shadow(0 8px 16px rgba(0,84,77,.3));
       animation-play-state: paused;
     }
@@ -570,6 +580,7 @@ src="https://www.facebook.com/tr?id=1412207127485609&ev=PageView&noscript=1"
     <!-- Mascot Laundry di atas paket -->
     <div style="display:flex;justify-content:center;margin:8px 0 32px;">
       <img src="Creative-Content/Mascot/Senang.png" alt="Maskot Kala dengan laundry"
+        class="mascot-float"
         style="width:160px;height:auto;"
         onerror="this.style.display='none'" />
     </div>
