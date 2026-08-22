@@ -76,7 +76,9 @@ src="https://www.facebook.com/tr?id=1412207127485609&ev=PageView&noscript=1"
       background: var(--brand-accent); border-radius: 6px; padding: 12px 28px;
       min-height: 48px; min-width: 44px; transition: filter .15s, transform .15s; border: none; cursor: pointer; }
     .btn:hover { filter: brightness(.88); transform: scale(1.02); }
-    .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; filter: none; }
+    .btn:disabled { opacity: .4; cursor: not-allowed; transform: none; filter: none; background: #aaa; }
+    /* Saat form siap disubmit, tombol kembali ke warna brand */
+    .btn:not(:disabled) { background: var(--brand-accent); }
     .btn-outline { background: transparent; color: var(--brand-primary); border: 2px solid var(--brand-primary); }
     .btn-outline:hover { background: var(--brand-primary); color: var(--white); filter: none; }
     .btn-sm { font-size: 14px; padding: 9px 20px; min-height: 40px; }
@@ -121,8 +123,22 @@ src="https://www.facebook.com/tr?id=1412207127485609&ev=PageView&noscript=1"
     .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.2);
       color: var(--white); font-weight: 700; font-size: 18px; padding: 10px 24px; border-radius: 999px; backdrop-filter: blur(4px); letter-spacing: .01em; }
     .hero-badge svg { flex-shrink: 0; }
-    .hero-mascot { width: 280px; margin-top: 8px; }
+    /* Floating mascot hero */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-14px); }
+    }
+    .hero-mascot { width: 280px; margin-top: 8px; animation: float 3.6s ease-in-out infinite; }
 
+    /* Heading mascots: capek & kenapa */
+    .section-heading-mascot {
+      height: 160px; width: auto; flex-shrink: 0;
+      transition: transform .35s ease, filter .35s ease;
+    }
+    .section-heading-mascot:hover {
+      transform: translateY(-8px) rotate(-4deg) scale(1.08);
+      filter: drop-shadow(0 8px 16px rgba(0,84,77,.25));
+    }
     /* ── Value Prop + Form ── */
     #daftar { background: var(--white); }
     .vp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
@@ -317,6 +333,7 @@ src="https://www.facebook.com/tr?id=1412207127485609&ev=PageView&noscript=1"
     @media (max-width: 479px) {
       .hero-headline { font-size: 28px; }
       .hero-mascot { width: 200px; }
+      .section-heading-mascot { height: 100px; }
       .container { padding: 0 16px; }
       .form-card { padding: 28px 20px; }
     }
@@ -406,13 +423,13 @@ src="https://www.facebook.com/tr?id=1412207127485609&ev=PageView&noscript=1"
       <div>
         <p class="vp-intro">
           Baju bersih tepat waktu, tanpa rasa lelah.<br>
-          <strong>Kalaklin hadir untuk membantumu dengan memberikan:</strong>
+          Kalaklin hadir untuk membantumu dengan memberikan:
         </p>
         <ul class="vp-list">
           <li class="vp-item">
             <img src="Creative-Content/Icons/Layanan 24 jam.png" alt="" class="vp-icon"
               onerror="this.outerHTML='<div class=\'vp-icon-placeholder\'><svg width=\'22\' height=\'22\' fill=\'none\' stroke=\'var(--brand-primary)\' stroke-width=\'2\' viewBox=\'0 0 24 24\'><circle cx=\'12\' cy=\'12\' r=\'10\'/><polyline points=\'12 6 12 12 16 14\'/></svg></div>'" />
-            <div class="vp-item-text"><strong>Layanan 24 jam</strong><span>Kalaklin hadir untuk membantu pelanggan yang memiliki keterbatasan waktu dalam mencuci pakaian. Antar-jemput langsung di depan pintu rumah.</span></div>
+            <div class="vp-item-text"><strong>Layanan 24 jam</strong><span>Kalaklin hadir untuk membantu pelanggan yang memiliki keterbatasan waktu dalam mencuci pakaian. Antar-jemput <strong>GRATIS</strong> dengan radius maksimal 10km, langsung di depan pintu rumah.</span></div>
           </li>
           <li class="vp-item">
             <img src="Creative-Content/Icons/Jaminan Bersih, Rapi.png" alt="" class="vp-icon"
@@ -459,7 +476,7 @@ src="https://www.facebook.com/tr?id=1412207127485609&ev=PageView&noscript=1"
               </label>
             </div>
             <div class="field-error-check" id="err-privacy" role="alert">Kamu harus menyetujui kebijakan privasi.</div>
-            <button type="submit" class="btn btn-full" id="btn-submit" style="margin-top:18px;">Daftar sekarang →</button>
+            <button type="submit" class="btn btn-full" id="btn-submit" style="margin-top:18px;" disabled>Daftar sekarang →</button>
           </form>
         </div>
       </div>
@@ -516,7 +533,7 @@ src="https://www.facebook.com/tr?id=1412207127485609&ev=PageView&noscript=1"
             onerror="this.outerHTML='<div class=\'why-icon-ph\' aria-hidden=\'true\'>🕐</div>'" />
           <div>
             <h4>24 jam siap melayani</h4>
-            <p>Kalaklin hadir untuk membantu pelanggan yang memiliki keterbatasan waktu dalam mencuci pakaian. Antar-jemput langsung di depan pintu rumah.</p>
+            <p>Kalaklin hadir untuk membantu pelanggan yang memiliki keterbatasan waktu dalam mencuci pakaian. Antar-jemput <strong>GRATIS</strong> dengan radius maksimal 10km, langsung di depan pintu rumah.</p>
           </div>
         </div>
         <div class="why-item">
@@ -906,15 +923,27 @@ src="https://www.facebook.com/tr?id=1412207127485609&ev=PageView&noscript=1"
     clearError(inputName, errName);
     clearError(inputIG, errIG);
     errPrivacy.classList.remove('visible');
-    btnSubmit.disabled = false;
-    btnSubmit.textContent = 'Daftar sekarang →';
     const errBox = document.getElementById('form-submit-error');
     if (errBox) errBox.textContent = '';
+    checkFormReady();
   }
 
-  inputName.addEventListener('input', () => clearError(inputName, errName));
-  inputIG.addEventListener('input', () => clearError(inputIG, errIG));
-  checkPrivacy.addEventListener('change', () => { if (checkPrivacy.checked) errPrivacy.classList.remove('visible'); });
+  inputName.addEventListener('input', () => { clearError(inputName, errName); checkFormReady(); });
+  inputIG.addEventListener('input', () => { clearError(inputIG, errIG); checkFormReady(); });
+  checkPrivacy.addEventListener('change', () => {
+    if (checkPrivacy.checked) errPrivacy.classList.remove('visible');
+    checkFormReady();
+  });
+
+  /* Aktifkan tombol hanya jika ketiga field terisi */
+  function checkFormReady() {
+    const ready = inputName.value.trim() !== '' &&
+                  inputIG.value.trim() !== '' &&
+                  checkPrivacy.checked;
+    btnSubmit.disabled = !ready;
+  }
+  /* Jalankan saat halaman load */
+  checkFormReady();
 
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
