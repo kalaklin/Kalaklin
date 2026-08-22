@@ -128,28 +128,35 @@ src="https://www.facebook.com/tr?id=1412207127485609&ev=PageView&noscript=1"
       0%, 100% { transform: translateY(0); }
       50%       { transform: translateY(-14px); }
     }
+    @keyframes float-gentle {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      40%       { transform: translateY(-10px) rotate(-2deg); }
+      70%       { transform: translateY(-6px) rotate(2deg); }
+    }
     .hero-mascot { width: 280px; margin-top: 8px; animation: float 3.6s ease-in-out infinite; }
 
-    /* Heading mascots: capek & kenapa */
+    /* Heading mascots: capek & kenapa — 160px + gentle float */
     .section-heading-mascot {
       height: 160px; width: auto; flex-shrink: 0;
-      transition: transform .35s ease, filter .35s ease;
+      animation: float-gentle 4s ease-in-out infinite;
+      transition: filter .35s ease;
     }
     .section-heading-mascot:hover {
-      transform: translateY(-8px) rotate(-4deg) scale(1.08);
-      filter: drop-shadow(0 8px 16px rgba(0,84,77,.25));
+      filter: drop-shadow(0 8px 16px rgba(0,84,77,.3));
+      animation-play-state: paused;
     }
     /* ── Value Prop + Form ── */
     #daftar { background: var(--white); }
     .vp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
-    .vp-intro { font-size: 29px; font-weight: 800; line-height: 1.3; margin-bottom: 28px; }
+    .vp-intro { font-size: 29px; font-weight: 800; line-height: 1.3; margin-bottom: 12px; }
+    .vp-sub   { font-size: 16px; font-weight: 400; line-height: 24px; opacity: .75; margin-bottom: 28px; }
     .vp-list { list-style: none; display: flex; flex-direction: column; gap: 18px; }
     .vp-item { display: flex; align-items: flex-start; gap: 14px; }
     .vp-icon { width: 44px; height: 44px; flex-shrink: 0; object-fit: contain; }
     .vp-icon-placeholder { width: 44px; height: 44px; flex-shrink: 0; border-radius: 8px;
       background: var(--brand-surface); display: flex; align-items: center; justify-content: center; }
-    .vp-item-text strong { display: block; font-weight: 700; font-size: 15px; }
-    .vp-item-text span { font-size: 14px; opacity: .8; }
+    .vp-item-text strong { display: block; font-weight: 700; font-size: 15px; margin-bottom: 2px; }
+    .vp-item-text span { font-size: 14px; line-height: 22px; opacity: .8; display: block; }
 
     .form-card { background: var(--white); border: 2px solid var(--brand-primary); border-radius: 16px; padding: 36px 32px; }
     .form-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 6px; text-align: center; }
@@ -184,7 +191,6 @@ src="https://www.facebook.com/tr?id=1412207127485609&ev=PageView&noscript=1"
     /* Heading row with mascot */
     .section-heading-row { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
     .section-heading-row.center { justify-content: center; }
-    .section-heading-mascot { height: 2.4em; width: auto; flex-shrink: 0; }
     .problem-card-icon { width: 72px; height: 72px; object-fit: contain; margin: 0 auto 16px; }
     .problem-card-icon-ph { width: 72px; height: 72px; border-radius: 12px; background: var(--brand-surface);
       margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; }
@@ -422,9 +428,9 @@ src="https://www.facebook.com/tr?id=1412207127485609&ev=PageView&noscript=1"
       <!-- Left: Value Props -->
       <div>
         <p class="vp-intro">
-          Baju bersih tepat waktu, tanpa rasa lelah.<br>
-          Kalaklin hadir untuk membantumu dengan memberikan:
+          Baju bersih tepat waktu, tanpa rasa lelah.
         </p>
+        <p class="vp-sub">Kalaklin hadir untuk membantumu dengan memberikan:</p>
         <ul class="vp-list">
           <li class="vp-item">
             <img src="Creative-Content/Icons/Layanan 24 jam.png" alt="" class="vp-icon"
