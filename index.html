@@ -76,6 +76,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .header-nav { display: flex; align-items: center; gap: 32px; margin-left: auto; }
     .header-nav a { font-size: 15px; font-weight: 500; color: var(--brand-primary); transition: opacity .15s; }
     .header-nav a:hover { opacity: .7; }
+    .header-nav .btn-nav-cta { font-size: 14px; font-weight: 700; color: var(--white);
+      background: var(--brand-primary); border-radius: 6px; padding: 9px 20px;
+      transition: background .2s, transform .15s; white-space: nowrap; }
+    .header-nav .btn-nav-cta:hover { background: #003d38; opacity: 1; transform: scale(1.03); }
     .hamburger { display: none; flex-direction: column; gap: 5px; padding: 10px; cursor: pointer; background: none; border: none; }
     .hamburger span { display: block; width: 24px; height: 2px; background: var(--brand-primary); border-radius: 2px; transition: transform .25s, opacity .25s; }
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -150,9 +154,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .vp-item-text strong { display: block; font-weight: 700; font-size: 15px; margin-bottom: 2px; }
     .vp-item-text span { font-size: 14px; line-height: 22px; opacity: .8; display: block; }
 
-    .form-card { background: var(--white); border: 2px solid var(--brand-primary); border-radius: 16px; padding: 36px 32px; }
-    .form-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 6px; text-align: center; }
-    .form-card > p { font-size: 14px; opacity: .75; margin-bottom: 24px; text-align: center; }
+    /* Form Card */
+    @keyframes border-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0,84,77,0), 0 4px 24px rgba(0,84,77,.10); }
+      50%       { box-shadow: 0 0 0 4px rgba(0,84,77,.12), 0 8px 32px rgba(0,84,77,.18); }
+    }
+    .form-card { background: var(--white); border: 2px solid var(--brand-primary);
+      border-radius: 16px; padding: 36px 32px;
+      animation: border-glow 3s ease-in-out infinite; }
+    .form-card-title { font-size: 26px; font-weight: 800; text-align: center;
+      color: var(--brand-primary); margin-bottom: 4px; line-height: 1.2; }
+    .form-card-subtitle { font-size: 13px; font-weight: 500; text-align: center;
+      color: var(--brand-accent); margin-bottom: 24px; }
     /* Privacy checkbox row */
     .privacy-check { display: flex; align-items: flex-start; gap: 10px; margin-top: 14px; }
     .privacy-check input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px;
@@ -354,7 +367,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <nav class="header-nav" aria-label="Navigasi Utama">
       <a href="#cara-kerja">Cara Kerja</a>
       <a href="#paket">Paket</a>
-      <a href="#tentang-kalaklin">Tentang Kalaklin</a>
+      <a href="#daftar" class="btn-nav-cta">Langganan Kalaklin</a>
     </nav>
     <div style="display:flex;align-items:center;gap:12px;">
       <button class="hamburger" id="hamburger" aria-label="Buka menu navigasi" aria-expanded="false">
@@ -370,7 +383,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <nav class="mobile-nav-drawer">
     <a href="#cara-kerja" class="mobile-nav-link">Cara Kerja</a>
     <a href="#paket" class="mobile-nav-link">Paket</a>
-    <a href="#tentang-kalaklin" class="mobile-nav-link">Tentang Kalaklin</a>
+    <a href="#daftar" class="mobile-nav-link" style="color:var(--brand-primary);font-weight:700;">Langganan Kalaklin</a>
     <a href="#faq" class="mobile-nav-link">FAQ</a>
   </nav>
 </div>
@@ -437,7 +450,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Right: Lead Form -->
       <div>
         <div class="form-card" role="form" aria-label="Form Pendaftaran Waitlist">
-          <h3>Daftar Sekarang</h3>
+          <p class="form-card-title">Promo Eksklusif Diskon Rp 40.000</p>
+          <p class="form-card-subtitle">*untuk 10 pendaftar pertama</p>
           <form id="lead-form" novalidate>
             <div class="form-field">
               <label for="input-name">Nama</label>
