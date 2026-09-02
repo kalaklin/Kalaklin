@@ -973,6 +973,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (json.result === 'success' || res.ok) {
         trackEvent('form_submit_success', { name, instagram: ig }); // Analytics placeholder
         openModal('modal-success');
+        // Reset tombol segera — form di-reset saat modal ditutup
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = 'Daftar sekarang →';
       } else {
         throw new Error(json.error || 'Respons tidak dikenali dari server.');
       }
